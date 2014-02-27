@@ -1,3 +1,3 @@
 require('typescript-require');
 
-module.exports = require('./src/finalDbObject.ts');
+module.exports = require('./src/server/finalDbObject.ts');

@@ -1,24 +1,22 @@
-///<reference path="./types/types.d.ts" />
+///<reference path="../types/types.d.ts" />
 var Config = require('./Config');
 var Environment = require('./Environment');
 var EventBus = require('./EventBus');
 var SQLiteDB = require('./SQLiteDB');
 var HTTPRouter = require('./HTTPRouter');
 
-var express = require('express');
-var http = require('http');
-var socketIO = require('socket.io');
+var expressIO = require('express.io');
 
 var Server = (function () {
     function Server(configData, env) {
         this._config = new Config(configData);
         this.env = env || 'development';
-        this.expressApp = express();
-        this.httpServer = http.createServer(this.expressApp);
-        this.socket = socketIO.listen(this.httpServer);
+        this.eioApp = expressIO();
+        this.configureExpressApp();
+        this.eioApp.http().io();
         this.eventBus = new EventBus();
         this.db = new SQLiteDB(this.eventBus, this.config);
-        this.httpRouter = new HTTPRouter(this.expressApp, this.db, this.config);
+        this.httpRouter = new HTTPRouter(this.eioApp, this.db, this.config);
         this.eventBus.on('SQLiteDB.error', this.onError);
     }
     Object.defineProperty(Server.prototype, "config", {
@@ -60,6 +58,19 @@ var Server = (function () {
 
     // -----------------------------------------------------
     //
+    // Private methods
+    //
+    // -----------------------------------------------------
+    Server.prototype.configureExpressApp = function () {
+        this.eioApp.use(expressIO.bodyParser({
+            keepExtensions: true,
+            uploadDir: __dirname + '/var/files',
+            strict: false
+        }));
+    };
+
+    // -----------------------------------------------------
+    //
     // Public methods
     //
     // -----------------------------------------------------
@@ -67,7 +78,7 @@ var Server = (function () {
         this.eventBus.emit('Server.listenRequest');
 
         this.eventBus.once('SQLiteDB.ready', function () {
-            this.expressApp.listen(this.config.port, function () {
+            this.eioApp.listen(this.config.port, function () {
                 this.eventBus.emit('listen');
             }.bind(this));
         }.bind(this));

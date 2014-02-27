@@ -1,23 +1,70 @@
 // Type definitions for Express 3.1
-// Project: http://expressjs.com
-// Definitions by: Boris Yankov <https://github.com/borisyankov/>
+// Project: http://express.io
+// Expressjs Definitions by: Boris Yankov <https://github.com/borisyankov/>
+// Express.io extension's definisions by Szymon Wygnański <https://github.com/finalclass>
 // DefinitelyTyped: https://github.com/borisyankov/DefinitelyTyped
+
+/// <reference path="socket.io.d.ts"/>
 
 /* =================== USAGE =================== 
 
-    import express = require('express');
-    var app = express();
+    import expressIO = require('express.io');
+    var app = expressIO();
 
  =============================================== */
 
-declare module "express" {
+declare module "express.io" {
     import http = require('http');
+    import sock = require('socket.io');
 
     // Merged declaration, e is both a callable function and a namespace
     function e(): e.Express;
 
     module e {
       
+        interface io {
+          () : SocketManager;
+          listen(server: http.Server, options: any, fn: Function): SocketManager;
+          listen(server: http.Server, fn?: Function): SocketManager;
+          listen(port: Number): SocketManager;
+        }
+
+        interface RequestIO {
+          socket:Socket;
+          request:e.Request;
+          manager:SocketManager
+          broadcast(event:string, message:any);
+          emit(event:string, message:any);
+          room(room:string);
+          join(room:string);
+          route(route:string);
+          leave(room:string);
+          on(eventType:string, ...args);
+          disconnect(callback:()=>void);
+        }
+
+        interface SocketRequest {
+          io:RequestIO;
+          data:any;
+          headers:Object;
+          session:Object;
+          handshake:Object;
+          socket:Socket;
+        }
+
+        interface AppIO {
+          broadcast(event:string, data:any) : void;
+          room(room:string) : AppIO;
+          route(r:string, callback:(req:SocketRequest)=>void) : void;
+          set(property:string, value:any) : void;
+          enable(property:string) : void;
+          configure(environment:()=>void) : void;
+        }
+
+        interface IHttp {
+          io: io;
+        }
+
         interface IRoute {
             path: string;
 
@@ -229,6 +276,7 @@ declare module "express" {
         }
 
         interface Request {
+            io : AppIO;
 
             session: Session;
 
@@ -893,6 +941,9 @@ declare module "express" {
         }
 
         interface Application extends IRouter<Application> {
+            http() : IHttp;
+
+            io : AppIO;
             /**
              * Initialize the server.
              *

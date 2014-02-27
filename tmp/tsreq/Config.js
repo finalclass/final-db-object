@@ -1,4 +1,4 @@
-///<reference path="types/types.d.ts"/>
+///<reference path="../types/types.d.ts"/>
 var Environment = require('./Environment');
 
 var Config = (function () {

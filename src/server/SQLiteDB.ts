@@ -1,4 +1,4 @@
-///<reference path="types/types.d.ts"/>
+///<reference path="../types/types.d.ts"/>
 
 import EventBus = require('./EventBus');
 import Config = require('./Config');

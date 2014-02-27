@@ -1,9 +1,11 @@
-///<reference path="./types/types.d.ts" />
+///<reference path="../types/types.d.ts" />
 var HTTPRouter = (function () {
     function HTTPRouter(expressApp, db, config) {
         this.expressApp = expressApp;
         this.db = db;
         this.config = config;
+        this.expressApp.get('/' + this.config.routesPrefix + '/final-db-object.js', this.getClientScriptAction.bind(this));
+
         this.expressApp.get('/' + this.config.routesPrefix + '/:path', this.findByPathMiddleware.bind(this), this.getAction.bind(this));
 
         this.expressApp.put('/' + this.config.routesPrefix + '/:path', this.setAction.bind(this));
@@ -20,6 +22,9 @@ var HTTPRouter = (function () {
                 next();
             }
         }), this);
+    };
+
+    HTTPRouter.prototype.getClientScriptAction = function (req, res) {
     };
 
     HTTPRouter.prototype.delAction = function (req, res) {

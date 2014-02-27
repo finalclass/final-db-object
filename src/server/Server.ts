@@ -1,4 +1,4 @@
-///<reference path="./types/types.d.ts" />
+///<reference path="../types/types.d.ts" />
 
 import Config = require('./Config');
 import Environment = require('./Environment');
@@ -6,30 +6,26 @@ import EventBus = require('./EventBus');
 import SQLiteDB = require('./SQLiteDB');
 import HTTPRouter = require('./HTTPRouter');
 
-import express = require('express');
+import expressIO = require('express.io');
 import http = require('http');
-import socketIO = require('socket.io');
 
 class Server {
 
   private _config:Config;
   private eventBus:EventBus;
-  private expressApp:express.Application;
-  private httpServer:http.Server;
-  private socket:SocketManager;
+  private eioApp:expressIO.Application;
   private db:SQLiteDB;
   private httpRouter:HTTPRouter;
 
   constructor(configData:IConfig, env?:string) {
     this._config = new Config(configData);
     this.env = env || 'development';
-    this.expressApp = express();
+    this.eioApp = expressIO();
     this.configureExpressApp();
-    this.httpServer = http.createServer(this.expressApp);
-    this.socket = socketIO.listen(this.httpServer);
+    this.eioApp.http().io();
     this.eventBus = new EventBus();
     this.db = new SQLiteDB(this.eventBus, this.config);
-    this.httpRouter = new HTTPRouter(this.expressApp, this.db, this.config);
+    this.httpRouter = new HTTPRouter(this.eioApp, this.db, this.config);
     this.eventBus.on('SQLiteDB.error', this.onError);
   }
 
@@ -71,7 +67,7 @@ class Server {
   // -----------------------------------------------------
   
   private configureExpressApp() : void {
-    this.expressApp.use(express.bodyParser({
+    this.eioApp.use(expressIO.bodyParser({
       keepExtensions: true, 
       uploadDir: __dirname + '/var/files',
       strict: false
@@ -88,7 +84,7 @@ class Server {
     this.eventBus.emit('Server.listenRequest');
 
     this.eventBus.once('SQLiteDB.ready', function () {
-      this.expressApp.listen(this.config.port, function () : void {
+      this.eioApp.listen(this.config.port, function () : void {
         this.eventBus.emit('listen');
       }.bind(this));
     }.bind(this));

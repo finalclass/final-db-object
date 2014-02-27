@@ -1,4 +1,4 @@
-///<reference path="./types/types.d.ts" />
+///<reference path="../types/types.d.ts" />
 
 import SQLiteDB = require('./SQLiteDB');
 import express = require('express');
@@ -12,8 +12,12 @@ class HTTPRouter {
     private db:SQLiteDB,
     private config:Config
   ) {
+
+    this.expressApp.get('/' + this.config.routesPrefix + '/final-db-object.js',
+      this.getClientScriptAction.bind(this));
+    
     this.expressApp.get(
-      '/' + this.config.routesPrefix + '/:path', 
+      '/' + this.config.routesPrefix + '/:path',
       this.findByPathMiddleware.bind(this),
       this.getAction.bind(this));
 
@@ -37,6 +41,10 @@ class HTTPRouter {
         next();
       }
     }), this);
+  }
+
+  private getClientScriptAction(req:express.Request, res:express.Response) : void {
+    
   }
 
   private delAction(req:express.Request, res:express.Response) : void {

@@ -1,4 +1,4 @@
-///<reference path="types/types.d.ts"/>
+///<reference path="../types/types.d.ts"/>
 var sqlite3 = require('sqlite3');
 var Variable = require('./Variable');
 var VariablesCollection = require('./VariablesCollection');
