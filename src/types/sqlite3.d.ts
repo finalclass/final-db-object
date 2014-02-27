@@ -26,7 +26,7 @@ declare module 'sqlite3' {
 
   export function verbose() : any;
 
-  class Statement extends events.EventEmitter {
+  export class Statement extends events.EventEmitter {
     bind(callback?:StandardCallback) : Statement;
     bind(arg1:any, callback?:StandardCallback) : Statement;
     bind(arg1:any, arg2:any, callback?:StandardCallback) : Statement;

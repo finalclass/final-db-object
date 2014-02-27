@@ -9,6 +9,10 @@
   },
   "author": "Szymon Wygnański <s@finalclass.net> (http://finalclass.net/)",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:finalclass/final-db-object.git"
+  },
   "dependencies": {
     "typescript-require": "~0.2.6",
     "express": "~3.4.8",

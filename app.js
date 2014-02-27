@@ -1,7 +1,5 @@
 var fdbo = require('./index.js');
 
-console.log(fdbo);
-
 var fdboServer = new fdbo.Server({
   development: {
     dbPath: __dirname + '/var/db.fdbo',

@@ -24,6 +24,7 @@ class Server {
     this._config = new Config(configData);
     this.env = env || 'development';
     this.expressApp = express();
+    this.configureExpressApp();
     this.httpServer = http.createServer(this.expressApp);
     this.socket = socketIO.listen(this.httpServer);
     this.eventBus = new EventBus();
@@ -61,6 +62,20 @@ class Server {
   
   private onError(err:Error) : void {
     console.log('FinalDBObject error', err, (<any>err).stack);
+  }
+
+  // -----------------------------------------------------
+  // 
+  // Private methods
+  //
+  // -----------------------------------------------------
+  
+  private configureExpressApp() : void {
+    this.expressApp.use(express.bodyParser({
+      keepExtensions: true, 
+      uploadDir: __dirname + '/var/files',
+      strict: false
+    }));
   }
 
   // -----------------------------------------------------

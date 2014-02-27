@@ -14,6 +14,7 @@ var Server = (function () {
         this._config = new Config(configData);
         this.env = env || 'development';
         this.expressApp = express();
+        this.configureExpressApp();
         this.httpServer = http.createServer(this.expressApp);
         this.socket = socketIO.listen(this.httpServer);
         this.eventBus = new EventBus();
@@ -56,6 +57,19 @@ var Server = (function () {
     // -----------------------------------------------------
     Server.prototype.onError = function (err) {
         console.log('FinalDBObject error', err, err.stack);
+    };
+
+    // -----------------------------------------------------
+    //
+    // Private methods
+    //
+    // -----------------------------------------------------
+    Server.prototype.configureExpressApp = function () {
+        this.expressApp.use(express.bodyParser({
+            keepExtensions: true,
+            uploadDir: __dirname + '/var/files',
+            strict: false
+        }));
     };
 
     // -----------------------------------------------------

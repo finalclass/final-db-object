@@ -14,3 +14,10 @@ interface IConfig {
   staging:IEnvironmentConfig;
   production:IEnvironmentConfig;
 }
+
+interface IRawData {
+  path?:string;
+  parent?:string;
+  type?:string;
+  value?:any;
+}
