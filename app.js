@@ -2,9 +2,14 @@ var fdbo = require('./index.js');
 
 var fdboServer = new fdbo.Server({
   development: {
-    dbPath: __dirname + '/var/db.fdbo',
     port: 8181,
-    routesPrefix: 'fdbo'
+    routesPrefix: 'fdbo',
+    dataStoreAdapter: 'sqlite',
+    dataStore: {
+      sqlite: {
+        path: __dirname + '/var/db.fdbo'
+      }
+    }
   },
   staging: {},
   production: {}

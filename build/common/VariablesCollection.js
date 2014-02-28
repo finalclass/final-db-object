@@ -1,5 +1,5 @@
 ///<reference path="../types/types.d.ts" />
-var Variable = require('./Variable');
+var Variable = require('../common/Variable');
 
 var VariablesCollection = (function () {
     function VariablesCollection(data) {

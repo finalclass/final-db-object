@@ -37,12 +37,9 @@ var Config = (function () {
         configurable: true
     });
 
-    Object.defineProperty(Config.prototype, "dbPath", {
-        // ---------------------------
-        // dbPath
-        // ---------------------------
+    Object.defineProperty(Config.prototype, "dataStoreAdapter", {
         get: function () {
-            return this.realConfig.dbPath;
+            return this.realConfig.dataStoreAdapter;
         },
         enumerable: true,
         configurable: true
@@ -54,6 +51,17 @@ var Config = (function () {
         // ---------------------------
         get: function () {
             return this.realConfig.routesPrefix || 'fdbo';
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    Object.defineProperty(Config.prototype, "dataStore", {
+        // ---------------------------
+        // dataStore
+        // ---------------------------
+        get: function () {
+            return this.realConfig.dataStore || {};
         },
         enumerable: true,
         configurable: true

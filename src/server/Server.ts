@@ -3,18 +3,18 @@
 import Config = require('./Config');
 import Environment = require('./Environment');
 import EventBus = require('./EventBus');
-import SQLiteDB = require('./SQLiteDB');
+import DataStore = require('./DataStore');
 import HTTPRouter = require('./HTTPRouter');
 
 import expressIO = require('express.io');
 import http = require('http');
-
+ 
 class Server {
 
   private _config:Config;
   private eventBus:EventBus;
   private eioApp:expressIO.Application;
-  private db:SQLiteDB;
+  private dataStore:DataStore;
   private httpRouter:HTTPRouter;
 
   constructor(configData:IConfig, env?:string) {
@@ -24,9 +24,10 @@ class Server {
     this.configureExpressApp();
     this.eioApp.http().io();
     this.eventBus = new EventBus();
-    this.db = new SQLiteDB(this.eventBus, this.config);
-    this.httpRouter = new HTTPRouter(this.eioApp, this.db, this.config);
-    this.eventBus.on('SQLiteDB.error', this.onError);
+    this.dataStore = new DataStore(this.eventBus, this.config);
+    this.httpRouter = new HTTPRouter(this.eioApp, this.dataStore, this.config);
+    this.eventBus.on('DataStore.initError', this.onError);
+    this.dataStore.init();
   }
 
   // -----------------------------------------------------

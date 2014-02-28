@@ -1,10 +1,10 @@
 ///<reference path="../types/types.d.ts" />
 
-class Variable {
+class Variable implements IVariable {
 
   private _raw:IRawData;
 
-  constructor(data?:Variable, path?:string);
+  constructor(data?:IVariable, path?:string);
   constructor(data?:IRawData, path?:string);
   constructor(data?:any, path?:string) {
     this.initData(data, path);
@@ -71,7 +71,7 @@ class Variable {
     return path.substr(0, path.lastIndexOf('.'));
   }
 
-  public get raw() : Object {
+  public get raw() : IRawData {
     return this._raw;
   }
 

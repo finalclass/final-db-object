@@ -1,8 +1,8 @@
 ///<reference path="../types/types.d.ts" />
 var HTTPRouter = (function () {
-    function HTTPRouter(expressApp, db, config) {
+    function HTTPRouter(expressApp, dataStore, config) {
         this.expressApp = expressApp;
-        this.db = db;
+        this.dataStore = dataStore;
         this.config = config;
         this.expressApp.get('/' + this.config.routesPrefix + '/final-db-object.js', this.getClientScriptAction.bind(this));
 
@@ -13,7 +13,7 @@ var HTTPRouter = (function () {
         this.expressApp.del('/' + this.config.routesPrefix + '/:path', this.findByPathMiddleware.bind(this), this.delAction.bind(this));
     }
     HTTPRouter.prototype.findByPathMiddleware = function (req, res, next) {
-        this.db.get(req.params.path, this.handleError(req, res, function (v) {
+        this.dataStore.get(req.params.path)(function (v) {
             if (!v) {
                 res.json(404, { status: 'error', reason: 'not_found' });
                 next(new Error('not_found'));
@@ -21,16 +21,16 @@ var HTTPRouter = (function () {
                 req.params.variable = v;
                 next();
             }
-        }), this);
+        }).catch(this.getErrorHandlerFunction(req, res)).run();
     };
 
     HTTPRouter.prototype.getClientScriptAction = function (req, res) {
     };
 
     HTTPRouter.prototype.delAction = function (req, res) {
-        this.db.del(req.params.path, this.handleError(req, res, function () {
-            res.send(204);
-        }), this);
+        this.dataStore.del(req.params.path)(function () {
+            return res.send(204);
+        }).catch(this.getErrorHandlerFunction(req, res)).run();
     };
 
     HTTPRouter.prototype.getAction = function (req, res) {
@@ -38,14 +38,12 @@ var HTTPRouter = (function () {
     };
 
     HTTPRouter.prototype.setAction = function (req, res) {
-        this.db.set(req.params.path, req.body, this.handleError(req, res, function () {
-            res.send(204);
-        }), this);
+        this.dataStore.set(req.params.path, req.body)(function () {
+            return res.send(204);
+        }).catch(this.getErrorHandlerFunction(req, res)).run();
     };
 
-    HTTPRouter.prototype.handleError = function (req, res, callback) {
-        var thisArg = this;
-
+    HTTPRouter.prototype.getErrorHandlerFunction = function (req, res) {
         return function (err) {
             var args = [];
             for (var _i = 0; _i < (arguments.length - 1); _i++) {
@@ -54,8 +52,6 @@ var HTTPRouter = (function () {
             if (err) {
                 console.log('HTTPRouter ERROR', err, err.stack);
                 res.json(500, { status: 'error', reason: 'internal_server_error' });
-            } else {
-                callback.apply(thisArg, args);
             }
         };
     };

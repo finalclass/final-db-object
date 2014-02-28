@@ -2,7 +2,7 @@
 var Config = require('./Config');
 var Environment = require('./Environment');
 var EventBus = require('./EventBus');
-var SQLiteDB = require('./SQLiteDB');
+var DataStore = require('./DataStore');
 var HTTPRouter = require('./HTTPRouter');
 
 var expressIO = require('express.io');
@@ -15,9 +15,10 @@ var Server = (function () {
         this.configureExpressApp();
         this.eioApp.http().io();
         this.eventBus = new EventBus();
-        this.db = new SQLiteDB(this.eventBus, this.config);
-        this.httpRouter = new HTTPRouter(this.eioApp, this.db, this.config);
-        this.eventBus.on('SQLiteDB.error', this.onError);
+        this.dataStore = new DataStore(this.eventBus, this.config);
+        this.httpRouter = new HTTPRouter(this.eioApp, this.dataStore, this.config);
+        this.eventBus.on('DataStore.initError', this.onError);
+        this.dataStore.init();
     }
     Object.defineProperty(Server.prototype, "config", {
         // -----------------------------------------------------

@@ -6,7 +6,7 @@ class Config implements IEnvironmentConfig {
 
   private _env:Environment;
   private realConfig:IEnvironmentConfig;
-
+ 
   constructor(private data:IConfig) {
     
   }
@@ -36,11 +36,8 @@ class Config implements IEnvironmentConfig {
     return this.realConfig.port || 8181;
   }
 
-  // ---------------------------
-  // dbPath
-  // ---------------------------
-  public get dbPath() : string {
-    return this.realConfig.dbPath;
+  public get dataStoreAdapter() : string {
+    return this.realConfig.dataStoreAdapter;
   }
 
   // ---------------------------
@@ -48,6 +45,13 @@ class Config implements IEnvironmentConfig {
   // ---------------------------
   public get routesPrefix() : string {
     return this.realConfig.routesPrefix || 'fdbo';
+  }
+
+  // ---------------------------
+  // dataStore
+  // ---------------------------
+  public get dataStore() : IDataStoreConfig {
+    return this.realConfig.dataStore || {};
   }
   
   // -----------------------------------------------------

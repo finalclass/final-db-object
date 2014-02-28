@@ -1,23 +1,23 @@
 ///<reference path="../types/types.d.ts" />
 
-import Variable = require('./Variable');
+import Variable = require('../common/Variable');
 
 class VariablesCollection {
 
-  private _raw:Variable[];
+  private _raw:IVariable[];
 
   constructor(data?:VariablesCollection);
   constructor(data?:IRawData[]);
-  constructor(data?:Variable);
+  constructor(data?:IVariable);
   constructor(data?:any) {
     this.initData(data);
   }
 
-  public get raw() : Variable[] {
+  public get raw() : IVariable[] {
     return this._raw;
   }
 
-  public add(variable:Variable) : void {
+  public add(variable:IVariable) : void {
     this.raw.push(variable);
   }
 
@@ -25,7 +25,7 @@ class VariablesCollection {
     return this._raw.length;
   }
 
-  public each(callback:(v:Variable) => void, thisArg?:any) : void {
+  public each(callback:(v:IVariable) => void, thisArg?:any) : void {
     for (var i = 0; i < this._raw.length; i += 1) {
       callback.call(thisArg, this._raw[i]);
     }
@@ -33,7 +33,7 @@ class VariablesCollection {
 
   private initData(data?:VariablesCollection);
   private initData(data?:IRawData[]);
-  private initData(data?:Variable);
+  private initData(data?:IVariable);
   private initData(data?:any) {
     if (data instanceof VariablesCollection) {
       this._raw = data.raw;

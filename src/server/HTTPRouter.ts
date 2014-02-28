@@ -1,15 +1,15 @@
 ///<reference path="../types/types.d.ts" />
 
-import SQLiteDB = require('./SQLiteDB');
+import DataStore = require('./DataStore');
 import express = require('express');
 import Config = require('./Config');
-import Variable = require('./Variable');
+import Variable = require('../common/Variable');
 
 class HTTPRouter {
 
   constructor(
     private expressApp:express.Application,
-    private db:SQLiteDB,
+    private dataStore:DataStore,
     private config:Config
   ) {
 
@@ -32,7 +32,8 @@ class HTTPRouter {
   }
 
   private findByPathMiddleware(req:express.Request, res:express.Response, next:(err?:Error)=>void) : void {
-    this.db.get(req.params.path, this.handleError(req, res, (v:Variable) : void => {
+    this.dataStore.get(<string>req.params.path)
+    ((v:Variable) => {
       if (!v) {
         res.json(404, {status: 'error', reason: 'not_found'});
         next(new Error('not_found'));
@@ -40,7 +41,9 @@ class HTTPRouter {
         req.params.variable = v;
         next();
       }
-    }), this);
+    })
+    .catch(this.getErrorHandlerFunction(req, res))
+    .run();
   }
 
   private getClientScriptAction(req:express.Request, res:express.Response) : void {
@@ -48,9 +51,10 @@ class HTTPRouter {
   }
 
   private delAction(req:express.Request, res:express.Response) : void {
-    this.db.del(req.params.path, this.handleError(req, res, () : void => {
-      res.send(204);
-    }), this);
+    this.dataStore.del(<string>req.params.path)
+    (()=> res.send(204))
+    .catch(this.getErrorHandlerFunction(req, res))
+    .run();
   }
 
   private getAction(req:express.Request, res:express.Response) : void {
@@ -58,20 +62,17 @@ class HTTPRouter {
   }
 
   private setAction(req:express.Request, res:express.Response) : void {
-    this.db.set(req.params.path, req.body, this.handleError(req, res, () : void => {
-      res.send(204);
-    }), this);
+    this.dataStore.set(<string>req.params.path, req.body)
+    (() => res.send(204))
+    .catch(this.getErrorHandlerFunction(req, res))
+    .run();
   }
 
-  private handleError(req:express.Request, res:express.Response, callback:(...args)=>void) : ()=>void {
-    var thisArg:HTTPRouter = this;
-
+  private getErrorHandlerFunction(req:express.Request, res:express.Response) : ()=>void {
     return (err?:Error, ...args) => {
       if (err) {
         console.log('HTTPRouter ERROR', err, (<any>err).stack);
         res.json(500, {status: 'error', reason: 'internal_server_error'});
-      } else {
-        callback.apply(thisArg, args);
       }
     };
   }
