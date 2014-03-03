@@ -6,7 +6,7 @@ declare module 'try' {
     function pause(n?:number) : () => ITry;
 
     interface ITry {
-      (callback:(...args)=>void) : ITry;
+      (callback?:(...args)=>void) : ITry;
       then(callback:(...args)=>void) : ITry;
       catch(callback:(err?:Error)=>void) : ITry;
       finally(callback:(...args)=>void) : ITry;

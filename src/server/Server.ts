@@ -5,7 +5,7 @@ import Environment = require('./Environment');
 import EventBus = require('./EventBus');
 import DataStore = require('./DataStore');
 import HTTPRouter = require('./HTTPRouter');
-
+import Try = require('try');
 import expressIO = require('express.io');
 import http = require('http');
  
@@ -27,7 +27,6 @@ class Server {
     this.dataStore = new DataStore(this.eventBus, this.config);
     this.httpRouter = new HTTPRouter(this.eioApp, this.dataStore, this.config);
     this.eventBus.on('DataStore.initError', this.onError);
-    this.dataStore.init();
   }
 
   // -----------------------------------------------------
@@ -84,12 +83,9 @@ class Server {
   public listen() : void {
     this.eventBus.emit('Server.listenRequest');
 
-    this.eventBus.once('SQLiteDB.ready', function () {
-      this.eioApp.listen(this.config.port, function () : void {
-        this.eventBus.emit('listen');
-      }.bind(this));
-    }.bind(this));
-
+    this.dataStore.init()
+    (() => this.eioApp.listen(this.config.port, Try.pause()))
+    (() => this.eventBus.emit('listen'));
   }
 
   public on(eventType:string, callback:(...args)=>void) {

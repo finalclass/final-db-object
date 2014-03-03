@@ -4,7 +4,7 @@ var Environment = require('./Environment');
 var EventBus = require('./EventBus');
 var DataStore = require('./DataStore');
 var HTTPRouter = require('./HTTPRouter');
-
+var Try = require('try');
 var expressIO = require('express.io');
 
 var Server = (function () {
@@ -18,7 +18,6 @@ var Server = (function () {
         this.dataStore = new DataStore(this.eventBus, this.config);
         this.httpRouter = new HTTPRouter(this.eioApp, this.dataStore, this.config);
         this.eventBus.on('DataStore.initError', this.onError);
-        this.dataStore.init();
     }
     Object.defineProperty(Server.prototype, "config", {
         // -----------------------------------------------------
@@ -76,13 +75,14 @@ var Server = (function () {
     //
     // -----------------------------------------------------
     Server.prototype.listen = function () {
+        var _this = this;
         this.eventBus.emit('Server.listenRequest');
 
-        this.eventBus.once('SQLiteDB.ready', function () {
-            this.eioApp.listen(this.config.port, function () {
-                this.eventBus.emit('listen');
-            }.bind(this));
-        }.bind(this));
+        this.dataStore.init()(function () {
+            return _this.eioApp.listen(_this.config.port, Try.pause());
+        })(function () {
+            return _this.eventBus.emit('listen');
+        });
     };
 
     Server.prototype.on = function (eventType, callback) {

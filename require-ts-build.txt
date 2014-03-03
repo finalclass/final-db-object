@@ -1,0 +1,18 @@
+--module commonjs --outDir /home/sel/Dokumenty/motim/motim/node_modules/final-db-object/build --target es5 
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/common/Variable.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/common/VariablesCollection.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/server/Config.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/server/DataStore.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/server/DataStoreSQLiteAdapter.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/server/Environment.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/server/EventBus.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/server/HTTPRouter.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/server/Server.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/server/index.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/types/express.d.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/types/express.io.d.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/types/node.d.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/types/socket.io.d.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/types/sqlite3.d.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/types/try.d.ts
+/home/sel/Dokumenty/motim/motim/node_modules/final-db-object/src/types/types.d.ts
