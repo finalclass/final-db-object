@@ -1,4 +1,4 @@
-///<reference path="../types/types.d.ts" />
+///<reference path="../types/types-server.d.ts"/>
 var DataStoreSQLiteAdapter = require('./DataStoreSQLiteAdapter');
 
 var Try = require('try');
@@ -18,14 +18,12 @@ var DataStore = (function () {
             return _this.onProcessExit();
         });
     }
-    DataStore.prototype.getErrorEmitterFunction = function () {
-        var _this = this;
-        return function (err) {
-            if (err) {
-                _this.eventBus.emit('DataStore.initError', err);
-                throw err;
-            }
-        };
+    DataStore.prototype.handleErrorAndProceed = function (err, possibleArgument) {
+        if (err) {
+            this.eventBus.emit('DataStore.error', err);
+            throw err;
+        }
+        return possibleArgument;
     };
 
     DataStore.prototype.init = function () {
@@ -33,11 +31,12 @@ var DataStore = (function () {
         return Try(function () {
             return _this.adapter.init(Try.pause());
         })(function (err) {
-            if (err)
-                throw err;
+            return _this.handleErrorAndProceed(err);
         })(function () {
             return _this.eventBus.emit('DataStore.initComplete');
-        }).catch(this.getErrorEmitterFunction()).run();
+        }).catch(function (err) {
+            return _this.handleErrorAndProceed(err);
+        }).run();
     };
 
     DataStore.prototype.get = function (path) {
@@ -45,8 +44,7 @@ var DataStore = (function () {
         return Try(function () {
             return _this.adapter.get(path, Try.pause());
         })(function (err, v) {
-            _this.getErrorEmitterFunction()(err);
-            return v;
+            return _this.handleErrorAndProceed(err, v);
         }).run();
     };
 
@@ -54,21 +52,27 @@ var DataStore = (function () {
         var _this = this;
         return Try(function () {
             return _this.adapter.del(path, Try.pause());
-        })(this.getErrorEmitterFunction()).run();
+        })(function (err) {
+            return _this.handleErrorAndProceed(err);
+        }).run();
     };
 
     DataStore.prototype.set = function (path, value) {
         var _this = this;
         return Try(function () {
             return _this.adapter.set(path, value, Try.pause());
-        })(this.getErrorEmitterFunction()).run();
+        })(function (err) {
+            return _this.handleErrorAndProceed(err);
+        }).run();
     };
 
     DataStore.prototype.close = function () {
         var _this = this;
         return Try(function () {
             return _this.adapter.close(Try.pause());
-        })(this.getErrorEmitterFunction()).run();
+        })(function (err) {
+            return _this.handleErrorAndProceed(err);
+        }).run();
     };
 
     DataStore.prototype.onProcessExit = function () {

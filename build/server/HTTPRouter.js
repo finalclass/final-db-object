@@ -1,4 +1,6 @@
-///<reference path="../types/types.d.ts" />
+///<reference path="../types/types-server.d.ts"/>
+var fs = require('fs');
+
 var HTTPRouter = (function () {
     function HTTPRouter(expressApp, dataStore, config) {
         this.expressApp = expressApp;
@@ -21,16 +23,18 @@ var HTTPRouter = (function () {
                 req.params.variable = v;
                 next();
             }
-        }).catch(this.getErrorHandlerFunction(req, res)).run();
+        }).catch(this.getErrorHandlerFunction(req, res));
     };
 
     HTTPRouter.prototype.getClientScriptAction = function (req, res) {
+        res.setHeader('Content-type', 'application/javascript');
+        fs.createReadStream(__dirname + '/../../build/client/FinalDBObject.js').pipe(res);
     };
 
     HTTPRouter.prototype.delAction = function (req, res) {
         this.dataStore.del(req.params.path)(function () {
             return res.send(204);
-        }).catch(this.getErrorHandlerFunction(req, res)).run();
+        }).catch(this.getErrorHandlerFunction(req, res));
     };
 
     HTTPRouter.prototype.getAction = function (req, res) {
@@ -40,7 +44,7 @@ var HTTPRouter = (function () {
     HTTPRouter.prototype.setAction = function (req, res) {
         this.dataStore.set(req.params.path, req.body)(function () {
             return res.send(204);
-        }).catch(this.getErrorHandlerFunction(req, res)).run();
+        }).catch(this.getErrorHandlerFunction(req, res));
     };
 
     HTTPRouter.prototype.getErrorHandlerFunction = function (req, res) {

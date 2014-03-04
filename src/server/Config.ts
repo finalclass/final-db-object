@@ -1,4 +1,4 @@
-///<reference path="../types/types.d.ts"/>
+///<reference path="../types/types-server.d.ts"/>
 
 import Environment = require('./Environment');
 
@@ -16,6 +16,27 @@ class Config implements IEnvironmentConfig {
   // Properties
   //
   // -----------------------------------------------------
+
+  // ---------------------------
+  // serverAddress
+  // ---------------------------
+  public get serverAddress() : string {
+    return this.protocol + '://' + this.host + ':' + this.port + '/' + this.routesPrefix;
+  }
+
+  // ---------------------------
+  // protocol
+  // ---------------------------
+  public get protocol() : string {
+    return this.realConfig.protocol || 'http://';
+  }
+
+  // ---------------------------
+  // host
+  // ---------------------------
+  public get host() : string {
+    return this.realConfig.host;
+  }  
 
   // ---------------------------
   // env
@@ -36,6 +57,9 @@ class Config implements IEnvironmentConfig {
     return this.realConfig.port || 8181;
   }
 
+  // ---------------------------
+  // dataStoreAdapter
+  // ---------------------------
   public get dataStoreAdapter() : string {
     return this.realConfig.dataStoreAdapter;
   }

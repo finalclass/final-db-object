@@ -44,6 +44,8 @@ interface IEnvironmentConfig {
   routesPrefix?:string;
   dataStoreAdapter?:string;
   dataStore?:IDataStoreConfig;
+  protocol?:string;
+  host?:string;
 }
 
 interface IConfig {

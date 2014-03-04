@@ -1,6 +1,6 @@
-///<reference path="../types/types.d.ts" />
+///<reference path="../types/types-server.d.ts" />
 
-import Variable = require('../common/Variable');
+import Variable = require('./Variable');
 
 class VariablesCollection {
 

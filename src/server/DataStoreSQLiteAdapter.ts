@@ -1,8 +1,8 @@
-///<reference path="../types/types.d.ts" />
+///<reference path="../types/types-server.d.ts"/>
 
 import sqlite3 = require('sqlite3');
-import Variable = require('../common/Variable');
-import VariablesCollection = require('../common/VariablesCollection');
+import Variable = require('./Variable');
+import VariablesCollection = require('./VariablesCollection');
 
 class DataStoreSQLiteAdapter implements IDataStoreAdapter {
 

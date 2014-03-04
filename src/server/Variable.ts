@@ -1,4 +1,4 @@
-///<reference path="../types/types.d.ts" />
+///<reference path="../types/types-server.d.ts" />
 
 class Variable implements IVariable {
 

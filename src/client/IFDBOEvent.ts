@@ -1,0 +1,3 @@
+interface IFDBOEvent {
+  type:string;
+}

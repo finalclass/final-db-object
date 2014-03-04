@@ -1,9 +1,10 @@
-///<reference path="../types/types.d.ts" />
+///<reference path="../types/types-server.d.ts"/>
 
 import DataStore = require('./DataStore');
 import express = require('express');
 import Config = require('./Config');
-import Variable = require('../common/Variable');
+import Variable = require('./Variable');
+import fs = require('fs');
 
 class HTTPRouter {
 
@@ -12,7 +13,6 @@ class HTTPRouter {
     private dataStore:DataStore,
     private config:Config
   ) {
-
     this.expressApp.get('/' + this.config.routesPrefix + '/final-db-object.js',
       this.getClientScriptAction.bind(this));
     
@@ -42,19 +42,18 @@ class HTTPRouter {
         next();
       }
     })
-    .catch(this.getErrorHandlerFunction(req, res))
-    .run();
+    .catch(this.getErrorHandlerFunction(req, res));
   }
 
   private getClientScriptAction(req:express.Request, res:express.Response) : void {
-    
+    res.setHeader('Content-type', 'application/javascript');
+    fs.createReadStream(__dirname + '/../../build/client/FinalDBObject.js').pipe(res);
   }
 
   private delAction(req:express.Request, res:express.Response) : void {
     this.dataStore.del(<string>req.params.path)
     (()=> res.send(204))
-    .catch(this.getErrorHandlerFunction(req, res))
-    .run();
+    .catch(this.getErrorHandlerFunction(req, res));
   }
 
   private getAction(req:express.Request, res:express.Response) : void {
@@ -64,8 +63,7 @@ class HTTPRouter {
   private setAction(req:express.Request, res:express.Response) : void {
     this.dataStore.set(<string>req.params.path, req.body)
     (() => res.send(204))
-    .catch(this.getErrorHandlerFunction(req, res))
-    .run();
+    .catch(this.getErrorHandlerFunction(req, res));
   }
 
   private getErrorHandlerFunction(req:express.Request, res:express.Response) : ()=>void {

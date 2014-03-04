@@ -1,10 +1,10 @@
-///<reference path="../types/types.d.ts" />
+///<reference path="../types/types-server.d.ts"/>
 
 import DataStoreSQLiteAdapter = require('./DataStoreSQLiteAdapter');
 import EventBus = require('./EventBus');
 import Config = require('./Config');
 import Try = require('try');
-import Variable = require('../common/Variable');
+import Variable = require('./Variable');
 
 class DataStore {
 
@@ -23,52 +23,48 @@ class DataStore {
     process.on('exit', () => this.onProcessExit());
   }
 
-  private getErrorEmitterFunction() : (err?:Error)=>void {
-    return (err?:Error) => {
-      if (err) {
-        this.eventBus.emit('DataStore.initError', err)
-        throw err;
-      }
-    };
+  private handleErrorAndProceed(err?:Error, possibleArgument?:any) : void {
+    if (err) {
+      this.eventBus.emit('DataStore.error', err);
+      throw err;
+    }
+    return possibleArgument;
   }
 
   public init() : Try.ITry {
     return Try
     (() => this.adapter.init(Try.pause()))
-    ((err?:Error) => {if (err) throw err;})
+    ((err?:Error) => this.handleErrorAndProceed(err))
     (() => this.eventBus.emit('DataStore.initComplete'))
-    .catch(this.getErrorEmitterFunction())
+    .catch((err?:Error) => this.handleErrorAndProceed(err))
     .run();
   }
 
   public get(path:string) : Try.ITry {
     return Try
     (() => this.adapter.get(path, Try.pause()))
-    ((err:Error, v:IVariable) => {
-      this.getErrorEmitterFunction()(err);
-      return v
-    })
+    ((err:Error, v:IVariable) => this.handleErrorAndProceed(err, v))
     .run();
   }
 
   public del(path:string) : Try.ITry {
     return Try
     (() => this.adapter.del(path, Try.pause()))
-    (this.getErrorEmitterFunction())
+    ((err?:Error) => this.handleErrorAndProceed(err))
     .run();
   }
 
   public set(path:string, value:any) : Try.ITry {
     return Try
     (() => this.adapter.set(path, value, Try.pause()))
-    (this.getErrorEmitterFunction())
+    ((err:Error) => this.handleErrorAndProceed(err))
     .run();
   }
 
   public close() : Try.ITry {
     return Try
     (() => this.adapter.close(Try.pause()))
-    (this.getErrorEmitterFunction())
+    ((err:Error) => this.handleErrorAndProceed(err))
     .run();
   }
 

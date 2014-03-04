@@ -1,16 +1,49 @@
-///<reference path="../types/types.d.ts"/>
+///<reference path="../types/types-server.d.ts"/>
 var Environment = require('./Environment');
 
 var Config = (function () {
     function Config(data) {
         this.data = data;
     }
-    Object.defineProperty(Config.prototype, "env", {
+    Object.defineProperty(Config.prototype, "serverAddress", {
         // -----------------------------------------------------
         //
         // Properties
         //
         // -----------------------------------------------------
+        // ---------------------------
+        // serverAddress
+        // ---------------------------
+        get: function () {
+            return this.protocol + '://' + this.host + ':' + this.port + '/' + this.routesPrefix;
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    Object.defineProperty(Config.prototype, "protocol", {
+        // ---------------------------
+        // protocol
+        // ---------------------------
+        get: function () {
+            return this.realConfig.protocol || 'http://';
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    Object.defineProperty(Config.prototype, "host", {
+        // ---------------------------
+        // host
+        // ---------------------------
+        get: function () {
+            return this.realConfig.host;
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    Object.defineProperty(Config.prototype, "env", {
         // ---------------------------
         // env
         // ---------------------------
@@ -38,6 +71,9 @@ var Config = (function () {
     });
 
     Object.defineProperty(Config.prototype, "dataStoreAdapter", {
+        // ---------------------------
+        // dataStoreAdapter
+        // ---------------------------
         get: function () {
             return this.realConfig.dataStoreAdapter;
         },

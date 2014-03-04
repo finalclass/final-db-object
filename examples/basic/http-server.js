@@ -1,4 +1,6 @@
-var fdbo = require('./index.js');
+var fdbo = require('../../index.js');
+var fs = require('fs');
+var expressIO = require('express.io');
 
 var fdboServer = new fdbo.Server({
   development: {
@@ -17,8 +19,10 @@ var fdboServer = new fdbo.Server({
   production: {}
 }, 'development');
 
-fdboServer.listen();
-
 fdboServer.on('listen', function () {
   console.log('Final DB Object server is listening on port', fdboServer.config.port);
 });
+
+fdboServer.eioApp.use(expressIO.static(__dirname + '/public'));
+
+fdboServer.listen();

@@ -1,30 +1,42 @@
-///<reference path="../types/types.d.ts" />
+///<reference path="../types/types-server.d.ts"/>
 var Config = require('./Config');
 var Environment = require('./Environment');
 var EventBus = require('./EventBus');
 var DataStore = require('./DataStore');
 var HTTPRouter = require('./HTTPRouter');
+var SocketRouter = require('./SocketRouter');
 var Try = require('try');
 var expressIO = require('express.io');
+
+var domain = require('domain');
 
 var Server = (function () {
     function Server(configData, env) {
         this._config = new Config(configData);
         this.env = env || 'development';
-        this.eioApp = expressIO();
+        this._eioApp = expressIO();
         this.configureExpressApp();
         this.eioApp.http().io();
         this.eventBus = new EventBus();
         this.dataStore = new DataStore(this.eventBus, this.config);
         this.httpRouter = new HTTPRouter(this.eioApp, this.dataStore, this.config);
+        this.socketRouter = new SocketRouter(this.eioApp, this.dataStore, this.config);
         this.eventBus.on('DataStore.initError', this.onError);
     }
-    Object.defineProperty(Server.prototype, "config", {
+    Object.defineProperty(Server.prototype, "eioApp", {
         // -----------------------------------------------------
         //
         // Properties
         //
         // -----------------------------------------------------
+        get: function () {
+            return this._eioApp;
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    Object.defineProperty(Server.prototype, "config", {
         get: function () {
             return this._config;
         },
@@ -33,9 +45,6 @@ var Server = (function () {
     });
 
     Object.defineProperty(Server.prototype, "env", {
-        // ---------------------------
-        // env
-        // ---------------------------
         get: function () {
             return this.config.env.toString();
         },
@@ -67,6 +76,21 @@ var Server = (function () {
             uploadDir: __dirname + '/var/files',
             strict: false
         }));
+        this.eioApp.use(this.domainSupportMiddleware.bind(this));
+        this.eioApp.use(this.httpErrorHandler.bind(this));
+    };
+
+    Server.prototype.httpErrorHandler = function (err, req, res, next) {
+        console.log('HTTP_ERROR', err, err.stack);
+        res.json(500, { status: 'error', reason: 'internal_server_error' });
+    };
+
+    Server.prototype.domainSupportMiddleware = function (req, res, next) {
+        var d = domain.create();
+        d.add(req);
+        d.add(res);
+        d.on('error', next);
+        d.run(next);
     };
 
     // -----------------------------------------------------

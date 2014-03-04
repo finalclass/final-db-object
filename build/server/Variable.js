@@ -1,4 +1,4 @@
-///<reference path="../types/types.d.ts" />
+///<reference path="../types/types-server.d.ts" />
 var Variable = (function () {
     function Variable(data, path) {
         this.initData(data, path);
