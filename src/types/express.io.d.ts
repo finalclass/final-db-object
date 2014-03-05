@@ -4,7 +4,7 @@
 // Express.io extension's definisions by Szymon Wygnański <https://github.com/finalclass>
 // DefinitelyTyped: https://github.com/borisyankov/DefinitelyTyped
 
-/// <reference path="socket.io.d.ts"/>
+/// <reference path="socket.io-server.d.ts"/>
 
 /* =================== USAGE =================== 
 

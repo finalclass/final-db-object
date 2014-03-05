@@ -15,6 +15,10 @@ class StaticFile {
     return path.resolve(__dirname, '..', '..', this._path);
   }
 
+  public get name() : string {
+    return this._name;
+  }
+
 }
 
 export = StaticFile;

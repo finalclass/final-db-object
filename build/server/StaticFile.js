@@ -13,6 +13,14 @@ var StaticFile = (function () {
         enumerable: true,
         configurable: true
     });
+
+    Object.defineProperty(StaticFile.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return StaticFile;
 })();
 

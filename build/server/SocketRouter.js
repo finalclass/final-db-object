@@ -4,19 +4,16 @@ var SocketRouter = (function () {
         this.eioApp = eioApp;
         this.dataStore = dataStore;
         this.config = config;
-        this.eioApp.io.route('get', this.getAction);
+        this.eioApp.io.route('get', this.getAction.bind(this));
     }
     SocketRouter.prototype.filterPath = function (path) {
         return path.replace(this.config.serverAddress, '');
     };
 
     SocketRouter.prototype.getAction = function (req) {
-        this.dataStore.get(this.filterPath(req.data))(function (v) {
-            if (v) {
-                req.io.emit('value', v.raw);
-            } else {
-                req.io.emit('value', { path: req.data });
-            }
+        var path = this.filterPath(req.data);
+        this.dataStore.get(path)(function (v) {
+            return req.io.emit('value', v ? v.raw : { path: path });
         });
     };
     return SocketRouter;

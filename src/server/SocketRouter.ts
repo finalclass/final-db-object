@@ -11,7 +11,7 @@ class SocketRouter {
     private dataStore:DataStore,
     private config:Config
   ) {
-    this.eioApp.io.route('get', this.getAction);
+    this.eioApp.io.route('get', this.getAction.bind(this));
   }
 
   private filterPath(path:string) : string {
@@ -19,14 +19,9 @@ class SocketRouter {
   }
 
   private getAction(req:expressIO.SocketRequest) : void {
-    this.dataStore.get(this.filterPath(req.data))
-    ((v:IVariable) => {
-      if (v) {
-        req.io.emit('value', v.raw)
-      } else {
-        req.io.emit('value', {path: req.data});
-      }
-    });
+    var path = this.filterPath(req.data);
+    this.dataStore.get(path)
+      ((v:IVariable) => req.io.emit('value', v ? v.raw : {path: path}));
   }
 
 }

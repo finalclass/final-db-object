@@ -16,10 +16,10 @@ var Server = (function () {
         this._config = new Config(configData);
         this.env = env || 'development';
         this._eioApp = expressIO();
+        this.eioApp.http().io();
         this.configureExpressApp();
         this.eventBus = new EventBus();
         this.dataStore = new DataStore(this.eventBus, this.config);
-        this.eioApp.http().io();
         this.staticFilesServer = new StaticFilesServer(this.config, this.eioApp);
         this.httpRouter = new HTTPRouter(this.eioApp, this.dataStore, this.config);
         this.socketRouter = new SocketRouter(this.eioApp, this.dataStore, this.config);
