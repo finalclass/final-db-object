@@ -4,13 +4,18 @@
   <meta charset="UTF-8">
   <title>FinalDBObject Basic Example</title>
   <script src="/jquery.js"></script>
-  <script src="/fdbo/final-db-object.js"></script>
+  <script src="/fdbo/fdbo.js"></script>
   <script>
 
   var fdbo = new FinalDBObject('http://localhost:8181/fdbo');
 
   $(function () {
-    
+    var abc = fdbo.child('item2.abc');
+
+    abc.on('value', function () {
+      console.log(arguments);
+    })
+
   });
 
   </script>

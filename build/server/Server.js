@@ -9,6 +9,7 @@ var Try = require('try');
 var expressIO = require('express.io');
 
 var domain = require('domain');
+var StaticFilesServer = require('./StaticFilesServer');
 
 var Server = (function () {
     function Server(configData, env) {
@@ -16,11 +17,13 @@ var Server = (function () {
         this.env = env || 'development';
         this._eioApp = expressIO();
         this.configureExpressApp();
-        this.eioApp.http().io();
         this.eventBus = new EventBus();
         this.dataStore = new DataStore(this.eventBus, this.config);
+        this.eioApp.http().io();
+        this.staticFilesServer = new StaticFilesServer(this.config, this.eioApp);
         this.httpRouter = new HTTPRouter(this.eioApp, this.dataStore, this.config);
         this.socketRouter = new SocketRouter(this.eioApp, this.dataStore, this.config);
+
         this.eventBus.on('DataStore.initError', this.onError);
     }
     Object.defineProperty(Server.prototype, "eioApp", {

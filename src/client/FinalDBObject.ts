@@ -1,35 +1,31 @@
 ///<reference path="../types/types-client.d.ts"/>
 ///<reference path="FDBOEventEmitter.ts"/>
+///<reference path="FDBOConnection.ts"/>
 
-document.write('<script src="/socket.io/socket.io.js"></script>');
 
 class FinalDBObject extends FDBOEventEmitter {
 
-  private _socket:ISocketIO;
-  private _url:string;
   private children:HashTable<FinalDBObject>;
+  private _connection:FDBOConnection;
 
   constructor(
     private _path:string,
     private _parent?:FinalDBObject
   ) {
     super();
-    if (!this.parent) {
-      this._socket = io.connect(this.path);
+    if (!this.connection) {
+      this._connection = new FDBOConnection(this.path);
     }
     this.children = Object.create(null);
     this.get();
   }
 
-  private get() : void {
-    this.socket.emit('get', this.path);
+  public get connection() : FDBOConnection {
+    return this._connection;
   }
 
-  private get socket() : ISocketIO {
-    if (this.parent) {
-      return this.parent.socket;
-    }
-    return this._socket;
+  private get() : void {
+    this.connection.socket.emit('get', this.path);
   }
 
   public child(name:string) : FinalDBObject {
@@ -46,13 +42,6 @@ class FinalDBObject extends FDBOEventEmitter {
 
   public get parent() : FinalDBObject {
     return this._parent;
-  }
-
-  public get root() : FinalDBObject {
-    if (!this.parent) {
-      return this;
-    }
-    return this.parent.root;
   }
 
 }

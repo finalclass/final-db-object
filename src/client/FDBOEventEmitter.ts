@@ -30,7 +30,7 @@ class FDBOEventEmitter {
 
   public emit(event:IFDBOEvent) : void {
     this.getAllListeners(event.type)
-      .forEach((listener:IFDBOListener) => listener.call(this, event));
+      .forEach((listener:IFDBOListener) => listener.call(this, event));2
   }
 
   public hashEventListener(eventType:string) : boolean {

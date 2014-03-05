@@ -14,7 +14,7 @@ var FinalDBObject = (function (_super) {
         this._path = _path;
         this._parent = _parent;
         if (!this.connection) {
-            this.connection = new FDBOConnection(this.path);
+            this._connection = new FDBOConnection(this.path);
         }
         this.children = Object.create(null);
         this.get();

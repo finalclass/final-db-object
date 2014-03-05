@@ -10,6 +10,7 @@ import Try = require('try');
 import expressIO = require('express.io');
 import http = require('http');
 import domain = require('domain');
+import StaticFilesServer = require('./StaticFilesServer');
 
 class Server {
 
@@ -19,17 +20,20 @@ class Server {
   private dataStore:DataStore;
   private httpRouter:HTTPRouter;
   private socketRouter:SocketRouter;
+  private staticFilesServer:StaticFilesServer;
 
   constructor(configData:IConfig, env?:string) {
     this._config = new Config(configData);
     this.env = env || 'development';
     this._eioApp = expressIO();
     this.configureExpressApp();
-    this.eioApp.http().io();
     this.eventBus = new EventBus();
     this.dataStore = new DataStore(this.eventBus, this.config);
+    this.eioApp.http().io();
+    this.staticFilesServer = new StaticFilesServer(this.config, this.eioApp);
     this.httpRouter = new HTTPRouter(this.eioApp, this.dataStore, this.config);
     this.socketRouter = new SocketRouter(this.eioApp, this.dataStore, this.config);
+    
     this.eventBus.on('DataStore.initError', this.onError);
   }
 

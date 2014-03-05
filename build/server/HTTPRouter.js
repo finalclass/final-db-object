@@ -1,13 +1,10 @@
 ///<reference path="../types/types-server.d.ts"/>
-var fs = require('fs');
-
+///<reference path="../types/hash-table.d.ts"/>
 var HTTPRouter = (function () {
     function HTTPRouter(expressApp, dataStore, config) {
         this.expressApp = expressApp;
         this.dataStore = dataStore;
         this.config = config;
-        this.expressApp.get('/' + this.config.routesPrefix + '/final-db-object.js', this.getClientScriptAction.bind(this));
-
         this.expressApp.get('/' + this.config.routesPrefix + '/:path', this.findByPathMiddleware.bind(this), this.getAction.bind(this));
 
         this.expressApp.put('/' + this.config.routesPrefix + '/:path', this.setAction.bind(this));
@@ -24,11 +21,6 @@ var HTTPRouter = (function () {
                 next();
             }
         }).catch(this.getErrorHandlerFunction(req, res));
-    };
-
-    HTTPRouter.prototype.getClientScriptAction = function (req, res) {
-        res.setHeader('Content-type', 'application/javascript');
-        fs.createReadStream(__dirname + '/../../build/client/FinalDBObject.js').pipe(res);
     };
 
     HTTPRouter.prototype.delAction = function (req, res) {
