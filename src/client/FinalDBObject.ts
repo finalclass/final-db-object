@@ -7,52 +7,48 @@ class FinalDBObject extends FDBOEventEmitter {
   private children:HashTable<FinalDBObject>;
   private _connection:FDBOConnection;
   private _value:any;
-  private _path:string;
+  private url:URI;
 
-  constructor(
-    private _uri:string,
-    private _parent?:FinalDBObject
-  ) {
+  constructor(url:string) {
     super();
-    if (!this.connection) {
-      this.connection = new FDBOConnection(this.path);
-    }
-    this._path = new URI(this.uri).path();
-    this.children = Object.create(null);
-    this.get();
+    this.url = new URI(url);
+    this.connection = FDBOConnection.getConnection(this.url);
+    this.children = {};
   }
 
-  public get connection() : FDBOConnection {
+  private get connection() : FDBOConnection {
     return this._connection;
   }
 
-  public set connection(conn:FDBOConnection) {
+  private set connection(conn:FDBOConnection) {
     this._connection = conn;
     conn.registerObject(this);
   }
 
-  private get() : void {
-    this.connection.get(this.path);
+  public get uri() : URI {
+    return this.url;
   }
 
   public child(name:string) : FinalDBObject {
-    var childPath:string = this.path + '.' + name;
+    var childPath:string = [this.url.toString(), name].join('/');
     if (!this.children[childPath]) {
       this.children[childPath] = new FinalDBObject(childPath);
     }
     return this.children[childPath];
   }
 
-  public get path() : string {
-    return this._path;
+  public set(value:any, callback?:(err?:Error)=>void) : void {
+    this.connection.set(this.uri, value);
   }
 
-  public get uri() : string {
-    return this._uri;
+  public get parentPath() : string {
+    var parts:string[] = this.url.segment();
+    parts.pop();
+    return parts.join('/');
   }
 
   public get parent() : FinalDBObject {
-    return this._parent;
+    return this.connection.hash.get(this.parentPath);
   }
 
   public get value() : string {

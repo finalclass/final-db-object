@@ -9,31 +9,15 @@
 
   var fdbo = new FinalDBObject('http://localhost:8181/fdbo');
 
-  fdbo.on('value', function (event) {
-    console.log('got value', event);
+  fdbo.child('foo').set('foo', function (error) {
+    console.log('DONE, possible error:', error);
   });
-
-  var abc = fdbo.child('item2.abc');
-
-  abc.on('value', function (event) {
-    console.log('item2.abc', event, abc.value);
-  });
-
-  // $(function () {
-  //   var abc = fdbo.child('item2.abc');
-  //   console.log('abc');
-
-  //   abc.on('value', function () {
-  //     console.log(arguments);
-  //   });
-
-  // });
 
   </script>
 </head>
 <body>
 
-<h1></h1>
+<h1>Nie działa</h1>
 
 </body>
 </html>

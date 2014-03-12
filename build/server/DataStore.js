@@ -36,7 +36,7 @@ var DataStore = (function () {
             return _this.eventBus.emit('DataStore.initComplete');
         }).catch(function (err) {
             return _this.handleErrorAndProceed(err);
-        }).run();
+        });
     };
 
     DataStore.prototype.get = function (path) {
@@ -45,7 +45,21 @@ var DataStore = (function () {
             return _this.adapter.get(path, Try.pause());
         })(function (err, v) {
             return _this.handleErrorAndProceed(err, v);
-        }).run();
+        })(function (v) {
+            return _this.normalizeVariable(v, path);
+        });
+    };
+
+    DataStore.prototype.normalizeVariable = function (v, path) {
+        v.path = v.path || path;
+        v.parent = v.parent || this.findParentPath(v.path);
+        return v;
+    };
+
+    DataStore.prototype.findParentPath = function (path) {
+        var parts = (path || '').split('/');
+        parts.pop();
+        return parts.join('/');
     };
 
     DataStore.prototype.del = function (path) {
@@ -54,7 +68,7 @@ var DataStore = (function () {
             return _this.adapter.del(path, Try.pause());
         })(function (err) {
             return _this.handleErrorAndProceed(err);
-        }).run();
+        });
     };
 
     DataStore.prototype.set = function (path, value) {
@@ -63,7 +77,7 @@ var DataStore = (function () {
             return _this.adapter.set(path, value, Try.pause());
         })(function (err) {
             return _this.handleErrorAndProceed(err);
-        }).run();
+        });
     };
 
     DataStore.prototype.close = function () {
@@ -72,7 +86,7 @@ var DataStore = (function () {
             return _this.adapter.close(Try.pause());
         })(function (err) {
             return _this.handleErrorAndProceed(err);
-        }).run();
+        });
     };
 
     DataStore.prototype.onProcessExit = function () {

@@ -34,14 +34,14 @@ var DataStoreSQLiteAdapter = (function () {
 
         var isError = false;
 
-        collection.each(function (v) {
-            _this.get(v.path, function (err, v) {
-                _this.sqlite.serialize(function () {
+        this.sqlite.serialize(function () {
+            collection.each(function (v) {
+                _this.get(v.path, function (err, foundVar) {
                     if (isError) {
                         return;
                     }
 
-                    if (v) {
+                    if (foundVar.path) {
                         _this.del(v.path, function (err) {
                             if (err) {
                                 isError = true;
@@ -61,7 +61,7 @@ var DataStoreSQLiteAdapter = (function () {
                     });
                 });
             });
-        }, this);
+        });
     };
 
     DataStoreSQLiteAdapter.prototype.objectToVarCollection = function (data, path, collection) {

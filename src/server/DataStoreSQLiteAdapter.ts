@@ -42,14 +42,14 @@ class DataStoreSQLiteAdapter implements IDataStoreAdapter {
 
     var isError:boolean = false;
 
-    collection.each((v:IVariable) => {
-      this.get(v.path, (err:Error, v:IVariable) => {
-        this.sqlite.serialize(() => {
+    this.sqlite.serialize(() => {
+      collection.each((v:IVariable) => {
+        this.get(v.path, (err:Error, foundVar:IVariable) => {
           if (isError) {
             return;
           }
 
-          if (v) {
+          if (foundVar.path) {
             this.del(v.path, (err:Error) => {
               if (err) {
                 isError = true;
@@ -69,7 +69,7 @@ class DataStoreSQLiteAdapter implements IDataStoreAdapter {
           });
         });
       });
-    }, this);
+    });
   }
 
   private objectToVarCollection(data:any, path:string, collection?:VariablesCollection) : VariablesCollection {

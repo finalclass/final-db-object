@@ -10,11 +10,11 @@ class FDBOHash {
   }
 
   public add(obj:FinalDBObject) : void {
-    this.data[obj.path || ''] = obj;
+    this.data[obj.uri.toString()] = obj;
   } 
 
   public get(path:string) : FinalDBObject {
-    return this.data[path || ''];
+    return this.data[path];
   }
 
 }

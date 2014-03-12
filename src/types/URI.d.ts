@@ -16,6 +16,10 @@ interface URIOptions {
     fragment?: string;
 }
 
+declare module 'URIjs' {
+    export = URI;
+}
+
 declare class URI {
     constructor();
     constructor(uri: string);

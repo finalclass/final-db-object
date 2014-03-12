@@ -9,16 +9,11 @@ var __extends = this.__extends || function (d, b) {
 };
 var FinalDBObject = (function (_super) {
     __extends(FinalDBObject, _super);
-    function FinalDBObject(_uri, _parent) {
+    function FinalDBObject(url) {
         _super.call(this);
-        this._uri = _uri;
-        this._parent = _parent;
-        if (!this.connection) {
-            this.connection = new FDBOConnection(this.path);
-        }
-        this._path = new URI(this.uri).path();
-        this.children = Object.create(null);
-        this.get();
+        this.url = new URI(url);
+        this.connection = FDBOConnection.getConnection(this.url);
+        this.children = {};
     }
     Object.defineProperty(FinalDBObject.prototype, "connection", {
         get: function () {
@@ -33,29 +28,31 @@ var FinalDBObject = (function (_super) {
     });
 
 
-    FinalDBObject.prototype.get = function () {
-        this.connection.get(this.path);
-    };
+    Object.defineProperty(FinalDBObject.prototype, "uri", {
+        get: function () {
+            return this.url;
+        },
+        enumerable: true,
+        configurable: true
+    });
 
     FinalDBObject.prototype.child = function (name) {
-        var childPath = this.path + '.' + name;
+        var childPath = [this.url.toString(), name].join('/');
         if (!this.children[childPath]) {
             this.children[childPath] = new FinalDBObject(childPath);
         }
         return this.children[childPath];
     };
 
-    Object.defineProperty(FinalDBObject.prototype, "path", {
-        get: function () {
-            return this._path;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    FinalDBObject.prototype.set = function (value, callback) {
+        this.connection.set(this.uri, value);
+    };
 
-    Object.defineProperty(FinalDBObject.prototype, "uri", {
+    Object.defineProperty(FinalDBObject.prototype, "parentPath", {
         get: function () {
-            return this._uri;
+            var parts = this.url.segment();
+            parts.pop();
+            return parts.join('/');
         },
         enumerable: true,
         configurable: true
@@ -63,7 +60,7 @@ var FinalDBObject = (function (_super) {
 
     Object.defineProperty(FinalDBObject.prototype, "parent", {
         get: function () {
-            return this._parent;
+            return this.connection.hash.get(this.parentPath);
         },
         enumerable: true,
         configurable: true

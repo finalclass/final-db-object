@@ -5,11 +5,11 @@ var FDBOHash = (function () {
         this.data = Object.create(null);
     }
     FDBOHash.prototype.add = function (obj) {
-        this.data[obj.path || ''] = obj;
+        this.data[obj.uri.toString()] = obj;
     };
 
     FDBOHash.prototype.get = function (path) {
-        return this.data[path || ''];
+        return this.data[path];
     };
     return FDBOHash;
 })();

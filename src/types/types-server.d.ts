@@ -2,6 +2,7 @@
 /// <reference path="sqlite3.d.ts"/>
 /// <reference path="express.io.d.ts"/>
 /// <reference path="try.d.ts"/>
+/// <reference path="URI.d.ts"/>
 
 interface IRawData {
   path?:string;
