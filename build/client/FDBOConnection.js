@@ -5,7 +5,7 @@
 var FDBOConnection = (function () {
     function FDBOConnection(serverURL) {
         this.serverURL = serverURL;
-        this._hash = new FDBOHash();
+        this._hash = new FDBOHash(this);
         this._socket = io.connect(this.serverURL);
         this.socket.on('value', this.onValue.bind(this));
     }
@@ -45,20 +45,29 @@ var FDBOConnection = (function () {
         });
     };
 
-    FDBOConnection.prototype.onValue = function (data) {
-        console.log('on value', data);
-        var path = data.path || '';
-        var obj = this.hash.get(path);
-
-        if (obj) {
-            obj.silentSetValue(data.value);
-            obj.emit(new FDBOEvent('value'));
-        }
+    FDBOConnection.prototype.findObjectByData = function (data) {
+        return this.hash.get(data.path || '');
     };
 
     FDBOConnection.prototype.registerObject = function (object) {
         this.hash.add(object);
         this.get(object.uri);
+    };
+
+    // ---------------------------
+    // Socket responders
+    // ---------------------------
+    FDBOConnection.prototype.onValue = function (data) {
+        console.log('on value', data);
+        var obj = this.findObjectByData(data);
+
+        console.log('obj', obj);
+
+        if (obj) {
+            console.log('OBJ', obj);
+            obj.silentSetValue(data.value);
+            obj.emit(new FDBOEvent('value'));
+        }
     };
     FDBOConnection.connections = {};
     return FDBOConnection;

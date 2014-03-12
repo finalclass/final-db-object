@@ -36,10 +36,11 @@ class SocketRouter {
   }
 
   private setAction(req:expressIO.SocketRequest) : void {
-    this.dataStore.set(this.filterPath(req.data.path), req.data.value)
-    (() => this.dataStore.get(req.data.path))
+    var path = this.filterPath(req.data.path);
+    this.dataStore.set(path, req.data.value)
+    (() => this.dataStore.get(path))
     ((v:IVariable) => {
-      console.log(v);
+      this.eioApp.io.broadcast('value', v.raw);
     });
   }
 

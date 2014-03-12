@@ -11,6 +11,7 @@ class StaticFilesServer {
     new StaticFile('socket.io.js', 
       'node_modules/express.io/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js'),
     new StaticFile('URI.js', 'node_modules/URIjs/src/URI.js'),
+    new StaticFile('FDBOUtils.js', 'build/client/FDBOUtils.js'),
     new StaticFile('FDBOEvent.js', 'build/client/FDBOEvent.js'),
     new StaticFile('FDBOEventEmitter.js', 'build/client/FDBOEventEmitter.js'),
     new StaticFile('FDBOHash.js', 'build/client/FDBOHash.js'),

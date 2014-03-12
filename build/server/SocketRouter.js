@@ -30,10 +30,11 @@ var SocketRouter = (function () {
 
     SocketRouter.prototype.setAction = function (req) {
         var _this = this;
-        this.dataStore.set(this.filterPath(req.data.path), req.data.value)(function () {
-            return _this.dataStore.get(req.data.path);
+        var path = this.filterPath(req.data.path);
+        this.dataStore.set(path, req.data.value)(function () {
+            return _this.dataStore.get(path);
         })(function (v) {
-            console.log(v);
+            _this.eioApp.io.broadcast('value', v.raw);
         });
     };
     return SocketRouter;

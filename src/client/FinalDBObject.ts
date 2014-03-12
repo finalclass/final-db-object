@@ -1,28 +1,24 @@
 ///<reference path="../types/types-client.d.ts"/>
 ///<reference path="FDBOEventEmitter.ts"/>
 ///<reference path="FDBOConnection.ts"/>
- 
+///<reference path="FDBOUtils.ts"/>
+
+
 class FinalDBObject extends FDBOEventEmitter {
 
   private children:HashTable<FinalDBObject>;
-  private _connection:FDBOConnection;
   private _value:any;
   private url:URI;
+  private selfSetCallback:(err?:Error)=>void;
 
   constructor(url:string) {
     super();
     this.url = new URI(url);
-    this.connection = FDBOConnection.getConnection(this.url);
-    this.children = {};
+    this.connection.registerObject(this);
   }
 
   private get connection() : FDBOConnection {
-    return this._connection;
-  }
-
-  private set connection(conn:FDBOConnection) {
-    this._connection = conn;
-    conn.registerObject(this);
+    return FDBOConnection.getConnection(this.url);
   }
 
   public get uri() : URI {
@@ -30,25 +26,15 @@ class FinalDBObject extends FDBOEventEmitter {
   }
 
   public child(name:string) : FinalDBObject {
-    var childPath:string = [this.url.toString(), name].join('/');
-    if (!this.children[childPath]) {
-      this.children[childPath] = new FinalDBObject(childPath);
-    }
-    return this.children[childPath];
+    return this.connection.hash.getOrCreate([this.url.toString(), name].join('/'));
   }
 
-  public set(value:any, callback?:(err?:Error)=>void) : void {
+  public set(value:any) : void {
     this.connection.set(this.uri, value);
   }
 
-  public get parentPath() : string {
-    var parts:string[] = this.url.segment();
-    parts.pop();
-    return parts.join('/');
-  }
-
   public get parent() : FinalDBObject {
-    return this.connection.hash.get(this.parentPath);
+    return this.connection.hash.get(FDBOUtils.getParentPath(this.url.toString()));
   }
 
   public get value() : string {

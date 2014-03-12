@@ -10,7 +10,7 @@ class FDBOConnection {
   private static connections:HashTable<FDBOConnection> = {};
 
   constructor(private serverURL:string) {
-    this._hash = new FDBOHash();
+    this._hash = new FDBOHash(this);
     this._socket = io.connect(this.serverURL);
     this.socket.on('value', this.onValue.bind(this));
   }
@@ -49,20 +49,30 @@ class FDBOConnection {
     });
   }
 
-  public onValue(data:any) : void {
-    console.log('on value', data);
-    var path:string = data.path || '';
-    var obj:FinalDBObject = this.hash.get(path);
-
-    if (obj) {
-      obj.silentSetValue(data.value);
-      obj.emit(new FDBOEvent('value'));
-    }
+  private findObjectByData(data:any) : FinalDBObject {
+    return this.hash.get(data.path || '');
   }
 
   public registerObject(object:FinalDBObject) : void {
     this.hash.add(object);
     this.get(object.uri);
+  }
+
+  // ---------------------------
+  // Socket responders
+  // ---------------------------
+
+  public onValue(data:any) : void {
+    console.log('on value', data);
+    var obj = this.findObjectByData(data);
+
+    console.log('obj', obj);
+
+    if (obj) {
+      console.log('OBJ', obj);
+      obj.silentSetValue(data.value);
+      obj.emit(new FDBOEvent('value'));
+    }
   }
 
 }

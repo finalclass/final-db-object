@@ -9,9 +9,11 @@
 
   var fdbo = new FinalDBObject('http://localhost:8181/fdbo');
 
-  fdbo.child('foo').set('foo', function (error) {
-    console.log('DONE, possible error:', error);
-  });
+  fdbo.child('foo').set('foo');
+  fdbo.child('foo').on('value', function () {
+    console.log('aaa');
+    console.log('val', fdbo.child('foo').val());
+  })
 
   </script>
 </head>
