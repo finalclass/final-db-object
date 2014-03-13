@@ -12,20 +12,21 @@ class FDBOHash {
   }
 
   public add(obj:FinalDBObject) : void {
-    this.data[obj.uri.toString()] = obj;
+    this.data[obj.uri.path()] = obj;
   } 
 
-  public get(path:string) : FinalDBObject {
-    return this.data[path];
+  public get(url:string) : FinalDBObject {
+    return this.data[new URI(url).path()];
   }
 
-  public has(path:string) : boolean {
-    return this.data[path] !== undefined;
+  public has(url:string) : boolean {
+    return this.data[new URI(url).path()] !== undefined;
   }
 
-  public getOrCreate(path:string) : FinalDBObject {
+  public getOrCreate(url:string) : FinalDBObject {
+    var path = new URI(url).path();
     if (!this.has(path)) {
-      this.add(new FinalDBObject(path));
+      this.add(new FinalDBObject(url));
     }
     return this.get(path);
   }

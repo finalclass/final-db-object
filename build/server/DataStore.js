@@ -2,6 +2,8 @@
 var DataStoreSQLiteAdapter = require('./DataStoreSQLiteAdapter');
 
 var Try = require('try');
+var Variable = require('./Variable');
+var VariablesCollection = require('./VariablesCollection');
 
 var DataStore = (function () {
     function DataStore(eventBus, config) {
@@ -73,10 +75,18 @@ var DataStore = (function () {
 
     DataStore.prototype.set = function (path, value) {
         var _this = this;
+        var collection = this.objectToVarCollection(value, path);
+
         return Try(function () {
-            return _this.adapter.set(path, value, Try.pause());
-        })(function (err) {
+            return _this.adapter.del(path, Try.pause());
+        })(Try.throwFirstArgument)(function () {
+            return collection.each(function (v) {
+                return _this.adapter.set(v, Try.pause());
+            });
+        })([Try.throwFirstArgumentInArray]).catch(function (err) {
             return _this.handleErrorAndProceed(err);
+        })(function () {
+            return collection;
         });
     };
 
@@ -94,6 +104,25 @@ var DataStore = (function () {
         this.close()(function () {
             return _this.eventBus.emit('DataStore.closeComplete');
         });
+    };
+
+    DataStore.prototype.objectToVarCollection = function (data, path, collection) {
+        var _this = this;
+        collection = collection || new VariablesCollection();
+        var typeofData = typeof data;
+
+        if (typeofData === 'string' || typeofData === 'number' || typeofData === 'boolean') {
+            collection.add(new Variable(data, path));
+        }
+
+        if (typeofData === 'object') {
+            collection.add(new Variable({ path: path, type: 'object' }));
+            Object.keys(data).forEach(function (key) {
+                _this.objectToVarCollection(data[key], path + '/' + key, collection);
+            }, this);
+        }
+
+        return collection;
     };
     return DataStore;
 })();

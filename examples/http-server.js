@@ -1,4 +1,4 @@
-var fdbo = require('../../index.js');
+var fdbo = require('../index.js');
 var fs = require('fs');
 var expressIO = require('express.io');
 
@@ -11,7 +11,7 @@ var fdboServer = new fdbo.Server({
     dataStoreAdapter: 'sqlite',
     dataStore: {
       sqlite: {
-        path: __dirname + '/var/db.fdbo'
+        path: __dirname + '/db.fdbo'
       }
     }
   },

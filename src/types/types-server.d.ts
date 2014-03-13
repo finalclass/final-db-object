@@ -25,7 +25,7 @@ interface IDataStoreAdapter {
   init(callback:(err?:Error)=>void) : void;
   get(path:string, callback:(err:Error, v:IVariable)=>void) : void;
   del(path:string, callback:(err:Error)=>void) : void;
-  set(path:string, value:any, callback:(err:Error)=>void) : void;
+  set(v:IVariable, callback:(err:Error)=>void) : void;
   close(done:(err?:Error)=>void) : void;
 }
 

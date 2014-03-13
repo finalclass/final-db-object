@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Writing whole objects to FDBO</title>
+
+  <script src="/jquery.js"></script>
+  <script src="/fdbo/dev/fdbo.js"></script>
+
+  <script>
+
+  $(function () {
+    var fdbo = new FinalDBObject('http://localhost:8181/fdbo');
+
+    fdbo.set({
+      one: {
+        two: {
+          three: 'works'
+        }
+      }
+    });
+
+    var three = new FinalDBObject('http://localhost:8181/fdbo/one/two/three');
+
+    three.on('value', function () {
+      $('h1').text(three.value);
+      console.log('THREE', three.value);
+    });
+
+  });
+
+
+  </script>
+
+</head>
+<body>
+  
+<h1>Does not work</h1>
+  
+
+</body>
+</html>

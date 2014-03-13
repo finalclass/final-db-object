@@ -5,6 +5,7 @@ import DataStore = require('./DataStore');
 import Config = require('./Config');
 import URI = require('URIjs');
 import Try = require('try');
+import VariablesCollection = require('./VariablesCollection');
 
 class SocketRouter {
 
@@ -18,29 +19,24 @@ class SocketRouter {
   }
 
   private filterPath(url:string) : string {
-    var seg = new URI(url).segment();
-    var pref = new URI(this.config.routesPrefix).segment();
-
-    for (var i = 0; i < seg.length; i += 1) {
-      if (seg[i] !== pref[i]) {
-        break;
-      }
-    }
-
-    return seg.slice(i).join('/');
+    return new URI(url).path();
   }
 
   private getAction(req:expressIO.SocketRequest) : void {
+    console.log('get', req.data);
     this.dataStore.get(this.filterPath(req.data))
     ((v:IVariable) => req.io.emit('value', v.raw));
   }
 
   private setAction(req:expressIO.SocketRequest) : void {
+    console.log('set');
     var path = this.filterPath(req.data.path);
     this.dataStore.set(path, req.data.value)
-    (() => this.dataStore.get(path))
-    ((v:IVariable) => {
-      this.eioApp.io.broadcast('value', v.raw);
+    ((collection:VariablesCollection) => {
+      collection.each((v:IVariable) => this.eioApp.io.broadcast('value', v.raw));
+    })
+    .catch((err:Error) => {
+      console.log(err);
     });
   }
 

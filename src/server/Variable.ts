@@ -68,7 +68,7 @@ class Variable implements IVariable {
   }
 
   private retrieveParentPath(path:string) : string {
-    return path.substr(0, path.lastIndexOf('.'));
+    return path.substr(0, path.lastIndexOf('/'));
   }
 
   public get raw() : IRawData {

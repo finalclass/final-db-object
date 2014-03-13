@@ -45,10 +45,6 @@ var FDBOConnection = (function () {
         });
     };
 
-    FDBOConnection.prototype.findObjectByData = function (data) {
-        return this.hash.get(data.path || '');
-    };
-
     FDBOConnection.prototype.registerObject = function (object) {
         this.hash.add(object);
         this.get(object.uri);
@@ -59,12 +55,9 @@ var FDBOConnection = (function () {
     // ---------------------------
     FDBOConnection.prototype.onValue = function (data) {
         console.log('on value', data);
-        var obj = this.findObjectByData(data);
-
-        console.log('obj', obj);
+        var obj = this.hash.get(data.path || '');
 
         if (obj) {
-            console.log('OBJ', obj);
             obj.silentSetValue(data.value);
             obj.emit(new FDBOEvent('value'));
         }

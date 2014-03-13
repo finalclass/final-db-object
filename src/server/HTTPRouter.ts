@@ -29,7 +29,7 @@ class HTTPRouter {
   }
 
   private findByPathMiddleware(req:expressIO.Request, res:expressIO.Response, next:(err?:Error)=>void) : void {
-    this.dataStore.get(<string>req.params.path)
+    this.dataStore.get(this.config.routesPrefix + '/' + <string>req.params.path)
     ((v:Variable) => {
       if (!v) {
         res.json(404, {status: 'error', reason: 'not_found'});
@@ -43,7 +43,7 @@ class HTTPRouter {
   }
 
   private delAction(req:expressIO.Request, res:expressIO.Response) : void {
-    this.dataStore.del(<string>req.params.path)
+    this.dataStore.del(req.params.variable.path)
     (()=> res.send(204))
     .catch(this.getErrorHandlerFunction(req, res));
   }
@@ -53,7 +53,7 @@ class HTTPRouter {
   }
 
   private setAction(req:expressIO.Request, res:expressIO.Response) : void {
-    this.dataStore.set(<string>req.params.path, req.body)
+    this.dataStore.set(this.config.routesPrefix + '/' + <string>req.params.path, req.body)
     (() => res.send(204))
     .catch(this.getErrorHandlerFunction(req, res));
   }

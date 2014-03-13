@@ -2,14 +2,18 @@
 
 import sqlite3 = require('sqlite3');
 import Variable = require('./Variable');
-import VariablesCollection = require('./VariablesCollection');
+import Try = require('try');
 
 class DataStoreSQLiteAdapter implements IDataStoreAdapter {
 
   private sqlite:sqlite3.Database;
+  private insertStmt:sqlite3.Statement;
 
   constructor(private sqliteConfig:IDataStoreSQLiteConfig) {
     this.sqlite = new sqlite3.Database(this.sqliteConfig.path);
+    this.insertStmt = this.sqlite.prepare('INSERT INTO '
+      + 'variable(path, parent, type, value) '
+      + 'values(?, ?, ?, ?)');
   }
 
   public init(callback:(err?:Error)=>void) : void {
@@ -33,62 +37,32 @@ class DataStoreSQLiteAdapter implements IDataStoreAdapter {
     this.sqlite.run('DELETE FROM variable WHERE path LIKE ?', path + '%', callback);
   }
 
-  public set(path:string, value:any, callback:(err:Error)=>void) : void {
-    var collection:VariablesCollection = this.objectToVarCollection(value, path);
-    var insertStmt:sqlite3.Statement = this.sqlite.prepare('INSERT INTO '
-      + 'variable(path, parent, type, value) '
-      + 'values(?, ?, ?, ?)');
-    var savedQueries:number = 0;
-
-    var isError:boolean = false;
-
-    this.sqlite.serialize(() => {
-      collection.each((v:IVariable) => {
-        this.get(v.path, (err:Error, foundVar:IVariable) => {
-          if (isError) {
-            return;
-          }
-
-          if (foundVar.path) {
-            this.del(v.path, (err:Error) => {
-              if (err) {
-                isError = true;
-                callback.call(this, err);
-              }
-            });
-          }
-          insertStmt.run(v.path, v.parent, v.type, v.value, (err) => {
-            if (err) {
-              isError = true;
-              callback.call(this, err);
-            }
-            savedQueries += 1;
-            if (savedQueries === collection.length) {
-              callback.call(this, null);
-            }
-          });
-        });
-      });
-    });
+  public set(v:IVariable, callback:(err:Error)=>void) : void {
+    this.insertStmt.run(v.path, v.parent, v.type, v.value, callback);
   }
 
-  private objectToVarCollection(data:any, path:string, collection?:VariablesCollection) : VariablesCollection {
-    collection = collection || new VariablesCollection();
-    var typeofData = typeof data;
+  // public set2(path:string, value:any, callback:(err:Error)=>void) : void {
+  //   var collection:VariablesCollection = this.objectToVarCollection(value, path);
+  //   var insertStmt:sqlite3.Statement = this.sqlite.prepare('INSERT INTO '
+  //     + 'variable(path, parent, type, value) '
+  //     + 'values(?, ?, ?, ?)');
+  //   var savedQueries:number = 0;
+  //   var isError:boolean = false;
 
-    if (typeofData === 'string' || typeofData === 'number' || typeofData === 'boolean') {
-      collection.add(new Variable(data, path));
-    }
-
-    if (typeofData === 'object') {
-      collection.add(new Variable({path: path, type: 'Object'}));
-      Object.keys(data).forEach((key:string) => {
-        this.objectToVarCollection(data[key], path + '.' + key, collection);
-      }, this);
-    }
-
-    return collection;
-  }
+  //   Try
+  //   (() => this.del(path, Try.pause()))
+  //   (Try.throwFirstArgument)
+  //   (() => {
+  //     var resume = Try.pause(collection.length);
+  //     collection.each((v:IVariable) => {
+  //       insertStmt.run(v.path, v.parent, v.type, v.value, resume);
+  //     });
+  //   })
+  //   ([Try.throwFirstArgumentInArray, (...args) => callback.call(this, null)])
+  //   .catch((err:Error) => {
+  //     console.log('ERROR', err, (<any>err).stack);
+  //   });
+  // }
 
   public close(done:(err?:Error)=>void) : void {
     this.sqlite.close();

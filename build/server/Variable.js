@@ -68,7 +68,7 @@ var Variable = (function () {
     };
 
     Variable.prototype.retrieveParentPath = function (path) {
-        return path.substr(0, path.lastIndexOf('.'));
+        return path.substr(0, path.lastIndexOf('/'));
     };
 
     Object.defineProperty(Variable.prototype, "raw", {

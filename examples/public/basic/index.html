@@ -9,17 +9,18 @@
 
   var fdbo = new FinalDBObject('http://localhost:8181/fdbo');
 
-  fdbo.child('foo').set('foo');
+  fdbo.child('foo').set('bar');
   fdbo.child('foo').on('value', function () {
-    console.log('aaa');
-    console.log('val', fdbo.child('foo').val());
-  })
+    if (fdbo.child('foo').value === 'bar') {
+      $('h1').html('works');
+    }
+  });
 
   </script>
 </head>
 <body>
 
-<h1>Nie działa</h1>
+<h1>Does not work</h1>
 
 </body>
 </html>

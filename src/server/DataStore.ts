@@ -5,6 +5,7 @@ import EventBus = require('./EventBus');
 import Config = require('./Config');
 import Try = require('try');
 import Variable = require('./Variable');
+import VariablesCollection = require('./VariablesCollection');
 
 class DataStore {
 
@@ -65,9 +66,15 @@ class DataStore {
   }
 
   public set(path:string, value:any) : Try.ITry {
+    var collection:VariablesCollection = this.objectToVarCollection(value, path);
+
     return Try
-    (() => this.adapter.set(path, value, Try.pause()))
-    ((err:Error) => this.handleErrorAndProceed(err));
+    (() => this.adapter.del(path, Try.pause()))
+    (Try.throwFirstArgument)
+    (() => collection.each((v:IVariable) => this.adapter.set(v, Try.pause())))
+    ([Try.throwFirstArgumentInArray])
+    .catch((err:Error) => this.handleErrorAndProceed(err))
+    (() => collection);
   }
 
   public close() : Try.ITry {
@@ -79,6 +86,24 @@ class DataStore {
   public onProcessExit() : void {
     this.close()
     (() => this.eventBus.emit('DataStore.closeComplete'));
+  }
+
+  private objectToVarCollection(data:any, path:string, collection?:VariablesCollection) : VariablesCollection {
+    collection = collection || new VariablesCollection();
+    var typeofData = typeof data;
+
+    if (typeofData === 'string' || typeofData === 'number' || typeofData === 'boolean') {
+      collection.add(new Variable(data, path));
+    }
+
+    if (typeofData === 'object') {
+      collection.add(new Variable({path: path, type: 'object'}));
+      Object.keys(data).forEach((key:string) => {
+        this.objectToVarCollection(data[key], path + '/' + key, collection);
+      }, this);
+    }
+
+    return collection;
   }
 
 }

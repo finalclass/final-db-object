@@ -49,10 +49,6 @@ class FDBOConnection {
     });
   }
 
-  private findObjectByData(data:any) : FinalDBObject {
-    return this.hash.get(data.path || '');
-  }
-
   public registerObject(object:FinalDBObject) : void {
     this.hash.add(object);
     this.get(object.uri);
@@ -64,12 +60,9 @@ class FDBOConnection {
 
   public onValue(data:any) : void {
     console.log('on value', data);
-    var obj = this.findObjectByData(data);
-
-    console.log('obj', obj);
+    var obj = this.hash.get(data.path || '');
 
     if (obj) {
-      console.log('OBJ', obj);
       obj.silentSetValue(data.value);
       obj.emit(new FDBOEvent('value'));
     }

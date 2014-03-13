@@ -12,7 +12,7 @@ var HTTPRouter = (function () {
         this.expressApp.del('/' + this.config.routesPrefix + '/:path', this.findByPathMiddleware.bind(this), this.delAction.bind(this));
     }
     HTTPRouter.prototype.findByPathMiddleware = function (req, res, next) {
-        this.dataStore.get(req.params.path)(function (v) {
+        this.dataStore.get(this.config.routesPrefix + '/' + req.params.path)(function (v) {
             if (!v) {
                 res.json(404, { status: 'error', reason: 'not_found' });
                 next(new Error('not_found'));
@@ -24,7 +24,7 @@ var HTTPRouter = (function () {
     };
 
     HTTPRouter.prototype.delAction = function (req, res) {
-        this.dataStore.del(req.params.path)(function () {
+        this.dataStore.del(req.params.variable.path)(function () {
             return res.send(204);
         }).catch(this.getErrorHandlerFunction(req, res));
     };
@@ -34,7 +34,7 @@ var HTTPRouter = (function () {
     };
 
     HTTPRouter.prototype.setAction = function (req, res) {
-        this.dataStore.set(req.params.path, req.body)(function () {
+        this.dataStore.set(this.config.routesPrefix + '/' + req.params.path, req.body)(function () {
             return res.send(204);
         }).catch(this.getErrorHandlerFunction(req, res));
     };

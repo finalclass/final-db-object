@@ -8,20 +8,21 @@ var FDBOHash = (function () {
         this.data = Object.create(null);
     }
     FDBOHash.prototype.add = function (obj) {
-        this.data[obj.uri.toString()] = obj;
+        this.data[obj.uri.path()] = obj;
     };
 
-    FDBOHash.prototype.get = function (path) {
-        return this.data[path];
+    FDBOHash.prototype.get = function (url) {
+        return this.data[new URI(url).path()];
     };
 
-    FDBOHash.prototype.has = function (path) {
-        return this.data[path] !== undefined;
+    FDBOHash.prototype.has = function (url) {
+        return this.data[new URI(url).path()] !== undefined;
     };
 
-    FDBOHash.prototype.getOrCreate = function (path) {
+    FDBOHash.prototype.getOrCreate = function (url) {
+        var path = new URI(url).path();
         if (!this.has(path)) {
-            this.add(new FinalDBObject(path));
+            this.add(new FinalDBObject(url));
         }
         return this.get(path);
     };
