@@ -2,6 +2,8 @@
 var sqlite3 = require('sqlite3');
 var Variable = require('./Variable');
 
+var VariablesCollection = require('./VariablesCollection');
+
 var DataStoreSQLiteAdapter = (function () {
     function DataStoreSQLiteAdapter(sqliteConfig) {
         this.sqliteConfig = sqliteConfig;
@@ -30,7 +32,11 @@ var DataStoreSQLiteAdapter = (function () {
     };
 
     DataStoreSQLiteAdapter.prototype.getChildren = function (parent, callback) {
-        this.getChildrenStmt.run(parent, callback);
+        this.getChildrenStmt.all(parent, function (err, records) {
+            console.log('records', records);
+            console.log('records', new VariablesCollection(records));
+            callback.call(null, err, new VariablesCollection(records));
+        });
     };
 
     DataStoreSQLiteAdapter.prototype.del = function (path, callback) {

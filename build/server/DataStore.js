@@ -77,6 +77,8 @@ var DataStore = (function () {
             return _this.adapter.del(path, Try.pause());
         })(function (err) {
             return _this.handleErrorAndProceed(err);
+        })(function () {
+            return _this.eventBus.emit('DataStore.variableDel', _this.normalizeVariable(new Variable(), path));
         });
     };
 
@@ -88,7 +90,11 @@ var DataStore = (function () {
             return _this.adapter.del(path, Try.pause());
         })(Try.throwFirstArgument)(function () {
             return collection.each(function (v) {
-                return _this.adapter.set(v, Try.pause());
+                var resume = Try.pause();
+                _this.adapter.set(v, function (err) {
+                    _this.eventBus.emit('DataStore.variableSet', v);
+                    resume(err);
+                });
             });
         })([Try.throwFirstArgumentInArray]).catch(function (err) {
             return _this.handleErrorAndProceed(err);

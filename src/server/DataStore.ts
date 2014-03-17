@@ -42,7 +42,7 @@ class DataStore {
   public getChildren(path:string) : Try.ITry {
     return Try
     (() => this.adapter.getChildren(path, Try.pause()))
-    ((err:Error, vars:IVariablesCollection) => this.handleErrorAndProceed(err,vars));
+    ((err:Error, vars:IVariablesCollection) => this.handleErrorAndProceed(err, vars));
   }
 
   public get(path:string) : Try.ITry {
@@ -67,7 +67,8 @@ class DataStore {
   public del(path:string) : Try.ITry {
     return Try
     (() => this.adapter.del(path, Try.pause()))
-    ((err?:Error) => this.handleErrorAndProceed(err));
+    ((err?:Error) => this.handleErrorAndProceed(err))
+    (() => this.eventBus.emit('DataStore.variableDel', this.normalizeVariable(new Variable(), path)));
   }
 
   public set(path:string, value:any) : Try.ITry {
@@ -76,7 +77,13 @@ class DataStore {
     return Try
     (() => this.adapter.del(path, Try.pause()))
     (Try.throwFirstArgument)
-    (() => collection.each((v:IVariable) => this.adapter.set(v, Try.pause())))
+    (() => collection.each((v:IVariable) => {
+      var resume:(err?:Error)=>void = Try.pause();
+      this.adapter.set(v, (err?:Error) => {
+        this.eventBus.emit('DataStore.variableSet', v);
+        resume(err)
+      });
+    }))
     ([Try.throwFirstArgumentInArray])
     .catch((err:Error) => this.handleErrorAndProceed(err))
     (() => collection);

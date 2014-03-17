@@ -11,9 +11,13 @@
     var fdbo = new FinalDBObject('http://localhost:8181/fdbo');
 
     fdbo.set({a: 'aaa', b: 'bbb', c: 'ccc'});
+    var result = {};
 
     fdbo.on('child_added', function (event) {
-      console.log(event);
+      result[event.child.name] = event.child.value;
+      if (result.a === 'aaa' && result.b === 'bbb' && result.c === 'ccc') {
+        $('h1').text('works');
+      }
     });
 
   });

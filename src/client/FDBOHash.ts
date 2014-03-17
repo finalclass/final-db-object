@@ -19,8 +19,13 @@ class FDBOHash {
     return this.data[new URI(url).path()];
   }
 
-  public has(url:string) : boolean {
-    return this.data[new URI(url).path()] !== undefined;
+  public has(object:FinalDBObject) : boolean;
+  public has(url:string) : boolean;
+  public has(obj:any) : boolean {
+    if (typeof obj === 'string') {
+      return this.data[new URI(obj).path()] !== undefined;
+    }
+    return this.data[obj.uri.path()] !== undefined;
   }
 
   public getOrCreate(url:string) : FinalDBObject {

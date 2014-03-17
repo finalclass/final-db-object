@@ -22,7 +22,7 @@ var Server = (function () {
         this.dataStore = new DataStore(this.eventBus, this.config);
         this.staticFilesServer = new StaticFilesServer(this.config, this.eioApp);
         this.httpRouter = new HTTPRouter(this.eioApp, this.dataStore, this.config);
-        this.socketRouter = new SocketRouter(this.eioApp, this.dataStore, this.config);
+        this.socketRouter = new SocketRouter(this.eioApp, this.dataStore, this.eventBus, this.config);
 
         this.eventBus.on('DataStore.initError', this.onError);
     }
@@ -105,7 +105,7 @@ var Server = (function () {
         var _this = this;
         this.eventBus.emit('Server.listenRequest');
         this.dataStore.init()(function () {
-            return _this.eioApp.listen(_this.config.port, Try.pause());
+            _this.eioApp.listen(_this.config.port, Try.pause());
         })(function () {
             return _this.eventBus.emit('listen');
         });

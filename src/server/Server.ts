@@ -32,7 +32,7 @@ class Server {
     this.dataStore = new DataStore(this.eventBus, this.config);
     this.staticFilesServer = new StaticFilesServer(this.config, this.eioApp);
     this.httpRouter = new HTTPRouter(this.eioApp, this.dataStore, this.config);
-    this.socketRouter = new SocketRouter(this.eioApp, this.dataStore, this.config);
+    this.socketRouter = new SocketRouter(this.eioApp, this.dataStore, this.eventBus, this.config);
     
     this.eventBus.on('DataStore.initError', this.onError);
   }
@@ -107,7 +107,9 @@ class Server {
   public listen() : void {
     this.eventBus.emit('Server.listenRequest');
     this.dataStore.init()
-    (() => this.eioApp.listen(this.config.port, Try.pause()))
+    (() => {
+      this.eioApp.listen(this.config.port, Try.pause());
+    })
     (() => this.eventBus.emit('listen'));
   }
 

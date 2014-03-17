@@ -2,6 +2,7 @@
 ///<reference path="FinalDBObject.ts"/>
 ///<reference path="FDBOHash.ts"/>
 ///<reference path="FDBOEvent.ts"/>
+///<reference path="FDBOChildAddedEvent.ts"/>
 var FDBOConnection = (function () {
     function FDBOConnection(serverURL) {
         this.serverURL = serverURL;
@@ -47,8 +48,12 @@ var FDBOConnection = (function () {
     };
 
     FDBOConnection.prototype.registerObject = function (object) {
-        this.hash.add(object);
-        this.get(object.uri);
+        if (!this.hash.has(object)) {
+            this.hash.add(object);
+            this.get(object.uri);
+        } else {
+            this.hash.add(object);
+        }
     };
 
     // ---------------------------
@@ -64,7 +69,11 @@ var FDBOConnection = (function () {
     };
 
     FDBOConnection.prototype.onChildAdded = function (data) {
-        console.log('onChildAdded', data);
+        var child = new FinalDBObject(this.serverURL + '/' + data.path, data.value);
+        var parent = child.parent;
+        if (parent) {
+            parent.emit(new FDBOChildAddedEvent('child_added', child));
+        }
     };
     FDBOConnection.connections = {};
     return FDBOConnection;

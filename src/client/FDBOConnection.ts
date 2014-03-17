@@ -2,6 +2,7 @@
 ///<reference path="FinalDBObject.ts"/>
 ///<reference path="FDBOHash.ts"/>
 ///<reference path="FDBOEvent.ts"/>
+///<reference path="FDBOChildAddedEvent.ts"/>
 
 class FDBOConnection {
 
@@ -51,8 +52,12 @@ class FDBOConnection {
   }
 
   public registerObject(object:FinalDBObject) : void {
-    this.hash.add(object);
-    this.get(object.uri);
+    if (!this.hash.has(object)) {
+      this.hash.add(object);
+      this.get(object.uri);
+    } else {
+      this.hash.add(object);
+    }
   }
 
   // ---------------------------
@@ -69,7 +74,11 @@ class FDBOConnection {
   }
 
   public onChildAdded(data:any) : void {
-    console.log('onChildAdded', data);
+    var child:FinalDBObject = new FinalDBObject(this.serverURL + '/' + data.path, data.value);
+    var parent = child.parent;
+    if (parent) {
+      parent.emit(new FDBOChildAddedEvent('child_added', child));
+    }
   }
 
 }

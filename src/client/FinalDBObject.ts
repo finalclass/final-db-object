@@ -11,10 +11,11 @@ class FinalDBObject extends FDBOEventEmitter {
   private url:URI;
   private selfSetCallback:(err?:Error)=>void;
 
-  constructor(url:string) {
+  constructor(url:string, initialValue?:any) {
     super();
     this.url = new URI(url);
     this.connection.registerObject(this);
+    this._value = initialValue;
   }
 
   private get connection() : FDBOConnection {
@@ -23,6 +24,11 @@ class FinalDBObject extends FDBOEventEmitter {
 
   public get uri() : URI {
     return this.url;
+  }
+
+  public get name() : string {
+    var seg = this.url.segment();
+    return seg[seg.length - 1];
   }
 
   public child(name:string) : FinalDBObject {
@@ -34,7 +40,7 @@ class FinalDBObject extends FDBOEventEmitter {
   }
 
   public get parent() : FinalDBObject {
-    return this.connection.hash.get(FDBOUtils.getParentPath(this.url.toString()));
+    return this.connection.hash.get(FDBOUtils.getParentPath(this.url));
   }
 
   public get value() : string {

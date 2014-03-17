@@ -1,16 +1,30 @@
 ///<reference path="../types/types-server.d.ts"/>
 var URI = require('URIjs');
 
+var VariablesCollection = require('./VariablesCollection');
+
 var SocketRouter = (function () {
-    function SocketRouter(eioApp, dataStore, config) {
+    function SocketRouter(eioApp, dataStore, eventBus, config) {
         this.eioApp = eioApp;
         this.dataStore = dataStore;
+        this.eventBus = eventBus;
         this.config = config;
         this.eioApp.io.route('get', this.getAction.bind(this));
         this.eioApp.io.route('set', this.setAction.bind(this));
+        this.eventBus.on('DataStore.variableSet', this.onVariableSet.bind(this));
+        this.eventBus.on('DataStore.variableDel', this.onVariableDel.bind(this));
     }
     SocketRouter.prototype.filterPath = function (url) {
         return new URI(url).path();
+    };
+
+    SocketRouter.prototype.onVariableDel = function (v) {
+        this.eioApp.io.broadcast('child_removed', v.raw);
+    };
+
+    SocketRouter.prototype.onVariableSet = function (v) {
+        this.eioApp.io.broadcast('value', v.raw);
+        this.eioApp.io.broadcast('child_added', v.raw);
     };
 
     SocketRouter.prototype.getAction = function (req) {
@@ -22,8 +36,7 @@ var SocketRouter = (function () {
                 return _this.dataStore.getChildren(v.path);
             }
         })(function (children) {
-            console.log(children);
-            if (children) {
+            if (children && children instanceof VariablesCollection) {
                 children.each(function (v) {
                     return req.io.emit('child_added', v.raw);
                 });
@@ -32,14 +45,8 @@ var SocketRouter = (function () {
     };
 
     SocketRouter.prototype.setAction = function (req) {
-        var _this = this;
-        console.log('set');
         var path = this.filterPath(req.data.path);
-        this.dataStore.set(path, req.data.value)(function (collection) {
-            collection.each(function (v) {
-                return _this.eioApp.io.broadcast('value', v.raw);
-            });
-        }).catch(function (err) {
+        this.dataStore.set(path, req.data.value).catch(function (err) {
             console.log(err);
         });
     };

@@ -10,10 +10,11 @@ var __extends = this.__extends || function (d, b) {
 };
 var FinalDBObject = (function (_super) {
     __extends(FinalDBObject, _super);
-    function FinalDBObject(url) {
+    function FinalDBObject(url, initialValue) {
         _super.call(this);
         this.url = new URI(url);
         this.connection.registerObject(this);
+        this._value = initialValue;
     }
     Object.defineProperty(FinalDBObject.prototype, "connection", {
         get: function () {
@@ -31,6 +32,15 @@ var FinalDBObject = (function (_super) {
         configurable: true
     });
 
+    Object.defineProperty(FinalDBObject.prototype, "name", {
+        get: function () {
+            var seg = this.url.segment();
+            return seg[seg.length - 1];
+        },
+        enumerable: true,
+        configurable: true
+    });
+
     FinalDBObject.prototype.child = function (name) {
         return this.connection.hash.getOrCreate([this.url.toString(), name].join('/'));
     };
@@ -41,7 +51,7 @@ var FinalDBObject = (function (_super) {
 
     Object.defineProperty(FinalDBObject.prototype, "parent", {
         get: function () {
-            return this.connection.hash.get(FDBOUtils.getParentPath(this.url.toString()));
+            return this.connection.hash.get(FDBOUtils.getParentPath(this.url));
         },
         enumerable: true,
         configurable: true

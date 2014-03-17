@@ -48,8 +48,8 @@ class VariablesCollection {
       }, this);
     } else if (data instanceof Variable) {
       this._raw = [data];
-    } else if (data) {
-      this._raw = [new Variable(data)];
+    } else if (data && data.path) {
+      this._raw = [new Variable(data, data.path)];
     } else {
       this._raw = [];
     }

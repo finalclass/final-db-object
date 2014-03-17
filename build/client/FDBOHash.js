@@ -15,8 +15,11 @@ var FDBOHash = (function () {
         return this.data[new URI(url).path()];
     };
 
-    FDBOHash.prototype.has = function (url) {
-        return this.data[new URI(url).path()] !== undefined;
+    FDBOHash.prototype.has = function (obj) {
+        if (typeof obj === 'string') {
+            return this.data[new URI(obj).path()] !== undefined;
+        }
+        return this.data[obj.uri.path()] !== undefined;
     };
 
     FDBOHash.prototype.getOrCreate = function (url) {

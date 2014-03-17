@@ -1,10 +1,13 @@
+///<reference path="../types/types-client.d.ts"/>
 var FDBOUtils = (function () {
     function FDBOUtils() {
     }
     FDBOUtils.getParentPath = function (path) {
-        var parts = path.segment();
-        parts.pop();
-        return parts.join('/');
+        var seg = path.segment();
+        var clone = path.clone();
+        seg.pop();
+        clone.segment(seg);
+        return clone.toString();
     };
     return FDBOUtils;
 })();
