@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lists of data</title>
+  <script src="/jquery.js"></script>
+  <script src="/fdbo/dev/fdbo.js"></script>
+  <script>
+
+  $(function () {
+    var fdbo = new FinalDBObject('http://localhost:8181/fdbo');
+
+    fdbo.set({a: 'aaa', b: 'bbb', c: 'ccc'});
+
+    fdbo.on('child_added', function (event) {
+      console.log(event);
+    });
+
+  });
+
+  </script>
+</head>
+<body>
+  
+  <h1>Does not work!</h1>
+
+</body>
+</html>

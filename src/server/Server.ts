@@ -106,7 +106,6 @@ class Server {
   
   public listen() : void {
     this.eventBus.emit('Server.listenRequest');
-
     this.dataStore.init()
     (() => this.eioApp.listen(this.config.port, Try.pause()))
     (() => this.eventBus.emit('listen'));

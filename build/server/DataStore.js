@@ -36,8 +36,15 @@ var DataStore = (function () {
             return _this.handleErrorAndProceed(err);
         })(function () {
             return _this.eventBus.emit('DataStore.initComplete');
-        }).catch(function (err) {
-            return _this.handleErrorAndProceed(err);
+        });
+    };
+
+    DataStore.prototype.getChildren = function (path) {
+        var _this = this;
+        return Try(function () {
+            return _this.adapter.getChildren(path, Try.pause());
+        })(function (err, vars) {
+            return _this.handleErrorAndProceed(err, vars);
         });
     };
 

@@ -25,7 +25,18 @@ class SocketRouter {
   private getAction(req:expressIO.SocketRequest) : void {
     console.log('get', req.data);
     this.dataStore.get(this.filterPath(req.data))
-    ((v:IVariable) => req.io.emit('value', v.raw));
+    ((v:IVariable) => {
+      req.io.emit('value', v.raw);
+      if (v.type === 'object') {
+        return this.dataStore.getChildren(v.path);
+      }
+    })
+    ((children?:VariablesCollection) => {
+      console.log(children);
+      if (children) {
+        children.each((v:IVariable) => req.io.emit('child_added', v.raw))
+      }
+    });
   }
 
   private setAction(req:expressIO.SocketRequest) : void {

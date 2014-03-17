@@ -31,6 +31,10 @@ class VariablesCollection {
     }
   }
 
+  public map(callback:(v:IVariable) => void, thisArg?:any) : any {
+    return this._raw.map(callback, thisArg);
+  }
+
   private initData(data?:VariablesCollection);
   private initData(data?:IRawData[]);
   private initData(data?:IVariable);

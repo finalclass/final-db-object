@@ -31,6 +31,10 @@ var VariablesCollection = (function () {
         }
     };
 
+    VariablesCollection.prototype.map = function (callback, thisArg) {
+        return this._raw.map(callback, thisArg);
+    };
+
     VariablesCollection.prototype.initData = function (data) {
         var _this = this;
         if (data instanceof VariablesCollection) {

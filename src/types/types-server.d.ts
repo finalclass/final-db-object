@@ -21,9 +21,18 @@ interface IVariable extends IRawData {
   toString() : string;
 }
 
+interface IVariablesCollection {
+  raw:IVariable[];
+  length:number;
+  add(variable:IVariable) : void;
+  each(callback:(v:IVariable) => void, thisArg?:any) : void;
+  map(callback:(v:IVariable) => void, thisArg?:any) : any;
+}
+
 interface IDataStoreAdapter {
   init(callback:(err?:Error)=>void) : void;
   get(path:string, callback:(err:Error, v:IVariable)=>void) : void;
+  getChildren(path:string, callback:(err:Error, vars?:IVariablesCollection)=>void) : void;
   del(path:string, callback:(err:Error)=>void) : void;
   set(v:IVariable, callback:(err:Error)=>void) : void;
   close(done:(err?:Error)=>void) : void;

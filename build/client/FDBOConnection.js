@@ -8,6 +8,7 @@ var FDBOConnection = (function () {
         this._hash = new FDBOHash(this);
         this._socket = io.connect(this.serverURL);
         this.socket.on('value', this.onValue.bind(this));
+        this.socket.on('child_added', this.onChildAdded.bind(this));
     }
     FDBOConnection.getConnection = function (uri) {
         var serverURL = new URI(uri).hash('').path('').query('').toString();
@@ -54,13 +55,16 @@ var FDBOConnection = (function () {
     // Socket responders
     // ---------------------------
     FDBOConnection.prototype.onValue = function (data) {
-        console.log('on value', data);
         var obj = this.hash.get(data.path || '');
 
         if (obj) {
             obj.silentSetValue(data.value);
             obj.emit(new FDBOEvent('value'));
         }
+    };
+
+    FDBOConnection.prototype.onChildAdded = function (data) {
+        console.log('onChildAdded', data);
     };
     FDBOConnection.connections = {};
     return FDBOConnection;

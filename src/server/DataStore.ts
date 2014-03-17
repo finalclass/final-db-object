@@ -36,8 +36,13 @@ class DataStore {
     return Try
     (() => this.adapter.init(Try.pause()))
     ((err?:Error) => this.handleErrorAndProceed(err))
-    (() => this.eventBus.emit('DataStore.initComplete'))
-    .catch((err?:Error) => this.handleErrorAndProceed(err));
+    (() => this.eventBus.emit('DataStore.initComplete'));
+  }
+
+  public getChildren(path:string) : Try.ITry {
+    return Try
+    (() => this.adapter.getChildren(path, Try.pause()))
+    ((err:Error, vars:IVariablesCollection) => this.handleErrorAndProceed(err,vars));
   }
 
   public get(path:string) : Try.ITry {

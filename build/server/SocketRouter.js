@@ -14,9 +14,20 @@ var SocketRouter = (function () {
     };
 
     SocketRouter.prototype.getAction = function (req) {
+        var _this = this;
         console.log('get', req.data);
         this.dataStore.get(this.filterPath(req.data))(function (v) {
-            return req.io.emit('value', v.raw);
+            req.io.emit('value', v.raw);
+            if (v.type === 'object') {
+                return _this.dataStore.getChildren(v.path);
+            }
+        })(function (children) {
+            console.log(children);
+            if (children) {
+                children.each(function (v) {
+                    return req.io.emit('child_added', v.raw);
+                });
+            }
         });
     };
 
@@ -25,7 +36,6 @@ var SocketRouter = (function () {
         console.log('set');
         var path = this.filterPath(req.data.path);
         this.dataStore.set(path, req.data.value)(function (collection) {
-            console.log(collection);
             collection.each(function (v) {
                 return _this.eioApp.io.broadcast('value', v.raw);
             });

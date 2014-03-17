@@ -104,7 +104,6 @@ var Server = (function () {
     Server.prototype.listen = function () {
         var _this = this;
         this.eventBus.emit('Server.listenRequest');
-
         this.dataStore.init()(function () {
             return _this.eioApp.listen(_this.config.port, Try.pause());
         })(function () {

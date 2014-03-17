@@ -13,6 +13,7 @@ class FDBOConnection {
     this._hash = new FDBOHash(this);
     this._socket = io.connect(this.serverURL);
     this.socket.on('value', this.onValue.bind(this));
+    this.socket.on('child_added', this.onChildAdded.bind(this));
   }
 
   public static getConnection(uri:string);
@@ -59,13 +60,16 @@ class FDBOConnection {
   // ---------------------------
 
   public onValue(data:any) : void {
-    console.log('on value', data);
     var obj = this.hash.get(data.path || '');
 
     if (obj) {
       obj.silentSetValue(data.value);
       obj.emit(new FDBOEvent('value'));
     }
+  }
+
+  public onChildAdded(data:any) : void {
+    console.log('onChildAdded', data);
   }
 
 }
