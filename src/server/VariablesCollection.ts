@@ -41,7 +41,7 @@ class VariablesCollection {
   private initData(data?:any) {
     if (data instanceof VariablesCollection) {
       this._raw = data.raw;
-    } else if (data instanceof Array) {
+    } else if (Array.isArray(data)) {
       this._raw = [];
       data.forEach((record) => {
         this._raw.push(record instanceof Variable ? record : new Variable(record));

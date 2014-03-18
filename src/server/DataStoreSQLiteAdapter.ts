@@ -46,8 +46,6 @@ class DataStoreSQLiteAdapter implements IDataStoreAdapter {
 
   public getChildren(parent:string, callback:(err:Error, vars?:IVariablesCollection)=>void) : void {
     this.getChildrenStmt.all(parent, (err:Error, records:IRawData[]) => {
-      console.log('records', records);
-      console.log('records', new VariablesCollection(records));
       callback.call(null, err, new VariablesCollection(records));
     });
   }

@@ -2,7 +2,6 @@
 ///<reference path="FinalDBObject.ts"/>
 ///<reference path="FDBOHash.ts"/>
 ///<reference path="FDBOEvent.ts"/>
-///<reference path="FDBOChildAddedEvent.ts"/>
 
 class FDBOConnection {
 
@@ -15,6 +14,8 @@ class FDBOConnection {
     this._socket = io.connect(this.serverURL);
     this.socket.on('value', this.onValue.bind(this));
     this.socket.on('child_added', this.onChildAdded.bind(this));
+    this.socket.on('child_removed', this.onChildRemoved.bind(this));
+    this.socket.on('del', this.onDel.bind(this));
   }
 
   public static getConnection(uri:string);
@@ -51,6 +52,12 @@ class FDBOConnection {
     });
   }
 
+  public del(url:string) : void;
+  public del(url:URI) : void;
+  public del(url:any) : void {
+    this.socket.emit('del', {path: new URI(url).toString()});
+  }
+
   public registerObject(object:FinalDBObject) : void {
     if (!this.hash.has(object)) {
       this.hash.add(object);
@@ -64,20 +71,40 @@ class FDBOConnection {
   // Socket responders
   // ---------------------------
 
-  public onValue(data:any) : void {
+  private onValue(data:any) : void {
     var obj = this.hash.get(data.path || '');
-
     if (obj) {
       obj.silentSetValue(data.value);
-      obj.emit(new FDBOEvent('value'));
+      obj.emit(new FDBOEvent(FDBOEvent.VALUE, obj));
     }
   }
 
-  public onChildAdded(data:any) : void {
+  private onChildAdded(data:any) : void {
     var child:FinalDBObject = new FinalDBObject(this.serverURL + '/' + data.path, data.value);
     var parent = child.parent;
     if (parent) {
-      parent.emit(new FDBOChildAddedEvent('child_added', child));
+      parent.emit(new FDBOEvent(FDBOEvent.CHILD_ADDED, child));
+    }
+  }
+
+  private onChildRemoved(data:any) : void {
+    if (this.hash.has(data.path)) {
+      this.delAndEmitDeleted(data.path);
+    }
+  }
+
+  private delAndEmitDeleted(path:string) : void {
+    var child = this.hash.get(path);
+    if (child.parent) {
+      child.parent.emit(new FDBOEvent(FDBOEvent.CHILD_REMOVED, child));
+    }
+    child.emit(new FDBOEvent(FDBOEvent.DELETED, child));
+    this.hash.del(path);
+  }
+
+  private onDel(data:any) : void {
+    if (this.hash.has(data.path)) {
+      this.delAndEmitDeleted(data.path);
     }
   }
 

@@ -6,7 +6,6 @@
 
 class FinalDBObject extends FDBOEventEmitter {
 
-  private children:HashTable<FinalDBObject>;
   private _value:any;
   private url:URI;
   private selfSetCallback:(err?:Error)=>void;
@@ -35,8 +34,16 @@ class FinalDBObject extends FDBOEventEmitter {
     return this.connection.hash.getOrCreate([this.url.toString(), name].join('/'));
   }
 
+  public get children() : FinalDBObject[] {
+    return this.connection.hash.getChildren(this);
+  }
+
   public set(value:any) : void {
     this.connection.set(this.uri, value);
+  }
+
+  public del() : void {
+    this.connection.del(this.uri);
   }
 
   public get parent() : FinalDBObject {

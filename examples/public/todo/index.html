@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo</title>
+  <script src="/jquery.js"></script>
+  <script src="/fdbo/dev/fdbo.js"></script>
+  <script>
+
+  var todosModel = new FinalDBObject('http://localhost:8181/fdbo/todos'); 
+
+  function initTodoTemplate() {
+    return $($('#todo-template').html());
+  }
+
+  function initForm() {
+    var $form = $('.new-todo');
+
+    $form.find('input[type="submit"]').on('click', function onFormSubmit(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      var $form = $(event.target).parents('form').first();
+      var $input = $form.find('input[type="text"]');
+      var value = $input.val();
+      var todo = todosModel.child(Math.random().toString(36));
+      todo.set({isDone: false, name: value});
+      $input.val('');
+    });
+
+    return $form;
+  }
+
+  $(function () {
+    var $todoTpl = initTodoTemplate();
+    var $form = initForm();
+    var $container = $('.container');
+    var $removeFinishedButton = $('.remove-finished-button');
+    var $todosList = $('.todos-list');
+
+    $removeFinishedButton.on('click', function onRemoveFinishedBUttonClick(event) {
+      event.preventDefault();
+      todosModel.children.forEach(function (todo) {
+        if (todo.child('isDone').value) {
+          todo.del();
+        }
+      });
+    });
+
+    todosModel.on('child_added', function onTodosChildAdded(event) {
+      var $todo = $todoTpl.clone(true);
+      var todo = event.object;
+
+      $todo.attr('id', 'task-' + todo.name);
+
+      todo.child('isDone').on('value', function () {
+        $todo.find('.task-is-done').prop('checked', todo.child('isDone').value);
+      });
+
+      todo.child('name').on('value', function () {
+        $todo.find('.task-name').text(todo.child('name').value);
+      });
+
+      $todo.find('.task-is-done').on('change', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        todo.child('isDone').set($(event.target).is(':checked'));
+      });
+
+      $todosList.append($todo);
+    });
+
+    todosModel.on('child_removed', function (event) {
+      $('#task-' + event.object.name.replace('.', '\\.')).remove();
+    });
+
+  });
+
+  </script>
+</head>
+<body>
+  
+  <script type="text/template" id="todo-template">
+  <div class="todo">
+    <input type="checkbox" class="task-is-done">
+    <span class="task-name"></span>
+  </div>
+  </script>
+
+  <div class="container">
+    <h1>ToDo</h1>
+    <div class="todos-list">
+      
+    </div>
+    <a href="#" class="remove-finished-button">Remove finished todos</a>
+    <form class="new-todo">
+      <input type="text" placeholder="new todo...">
+      <input type="submit" value="Save">
+    </form>
+  </div>  
+</body>
+</html>

@@ -3,7 +3,12 @@
 
 class FDBOEvent implements IFDBOEvent {
 
-  constructor(private _type:string) {
+  public static VALUE:string = 'value';
+  public static CHILD_ADDED:string = 'child_added';
+  public static CHILD_REMOVED:string = 'child_removed';
+  public static DELETED:string = 'deleted';
+
+  constructor(private _type:string, private object:FinalDBObject) {
 
   }
 

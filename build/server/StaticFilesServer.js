@@ -12,7 +12,6 @@ var StaticFilesServer = (function () {
             new StaticFile('URI.js', 'node_modules/URIjs/src/URI.js'),
             new StaticFile('FDBOUtils.js', 'build/client/FDBOUtils.js'),
             new StaticFile('FDBOEvent.js', 'build/client/FDBOEvent.js'),
-            new StaticFile('FDBOChildAddedEvent.js', 'build/client/FDBOChildAddedEvent.js'),
             new StaticFile('FDBOEventEmitter.js', 'build/client/FDBOEventEmitter.js'),
             new StaticFile('FDBOHash.js', 'build/client/FDBOHash.js'),
             new StaticFile('FDBOConnection.js', 'build/client/FDBOConnection.js'),

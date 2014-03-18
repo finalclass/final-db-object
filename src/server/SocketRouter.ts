@@ -7,6 +7,7 @@ import Config = require('./Config');
 import URI = require('URIjs');
 import Try = require('try');
 import VariablesCollection = require('./VariablesCollection');
+import Variable = require('./Variable');
 
 class SocketRouter {
 
@@ -18,12 +19,13 @@ class SocketRouter {
   ) {
     this.eioApp.io.route('get', this.getAction.bind(this));
     this.eioApp.io.route('set', this.setAction.bind(this));
+    this.eioApp.io.route('del', this.delAction.bind(this));
     this.eventBus.on('DataStore.variableSet', this.onVariableSet.bind(this));
     this.eventBus.on('DataStore.variableDel', this.onVariableDel.bind(this));
   }
 
   private filterPath(url:string) : string {
-    return new URI(url).path();
+    return '/' + new URI(url).segment().filter((a:string) => a !== '').join('/');
   }
 
   private onVariableDel(v:IVariable) : void {
@@ -54,9 +56,22 @@ class SocketRouter {
   private setAction(req:expressIO.SocketRequest) : void {
     var path = this.filterPath(req.data.path);
     this.dataStore.set(path, req.data.value)
-    // ((collection:VariablesCollection) => {
-    //   collection.each((v:IVariable) => this.eioApp.io.broadcast('value', v.raw));
-    // })
+    .catch((err:Error) => {
+      console.log(err);
+    });
+  }
+
+  private delAction(req:expressIO.SocketRequest) : void {
+    var path = this.filterPath(req.data.path);
+    var child:IVariable;
+
+    this.dataStore.get(path)
+    ((v:IVariable) => child = v)
+    (() => this.dataStore.del(path))
+    (() => {
+      this.eioApp.io.broadcast('del', child.raw);
+      this.eioApp.io.broadcast('child_removed', child.raw);
+    })
     .catch((err:Error) => {
       console.log(err);
     });

@@ -39,7 +39,7 @@ var VariablesCollection = (function () {
         var _this = this;
         if (data instanceof VariablesCollection) {
             this._raw = data.raw;
-        } else if (data instanceof Array) {
+        } else if (Array.isArray(data)) {
             this._raw = [];
             data.forEach(function (record) {
                 _this._raw.push(record instanceof Variable ? record : new Variable(record));

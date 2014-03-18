@@ -33,8 +33,6 @@ var DataStoreSQLiteAdapter = (function () {
 
     DataStoreSQLiteAdapter.prototype.getChildren = function (parent, callback) {
         this.getChildrenStmt.all(parent, function (err, records) {
-            console.log('records', records);
-            console.log('records', new VariablesCollection(records));
             callback.call(null, err, new VariablesCollection(records));
         });
     };

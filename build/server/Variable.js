@@ -55,7 +55,13 @@ var Variable = (function () {
                 type: data.type,
                 value: data.value
             };
-        } else if (typeofData === 'string' && path) {
+            if (data.type === 'boolean') {
+                this._raw.value = this._raw.value !== '0';
+            }
+            if (data.type === 'number') {
+                this._raw.value = parseFloat(this._raw.value);
+            }
+        } else if (path && (typeofData === 'string' || typeofData === 'boolean' || typeofData === 'number')) {
             this._raw = {
                 path: path,
                 parent: this.retrieveParentPath(path),

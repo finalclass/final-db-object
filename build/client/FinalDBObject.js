@@ -45,8 +45,20 @@ var FinalDBObject = (function (_super) {
         return this.connection.hash.getOrCreate([this.url.toString(), name].join('/'));
     };
 
+    Object.defineProperty(FinalDBObject.prototype, "children", {
+        get: function () {
+            return this.connection.hash.getChildren(this);
+        },
+        enumerable: true,
+        configurable: true
+    });
+
     FinalDBObject.prototype.set = function (value) {
         this.connection.set(this.uri, value);
+    };
+
+    FinalDBObject.prototype.del = function () {
+        this.connection.del(this.uri);
     };
 
     Object.defineProperty(FinalDBObject.prototype, "parent", {

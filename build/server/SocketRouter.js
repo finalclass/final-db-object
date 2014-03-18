@@ -11,11 +11,14 @@ var SocketRouter = (function () {
         this.config = config;
         this.eioApp.io.route('get', this.getAction.bind(this));
         this.eioApp.io.route('set', this.setAction.bind(this));
+        this.eioApp.io.route('del', this.delAction.bind(this));
         this.eventBus.on('DataStore.variableSet', this.onVariableSet.bind(this));
         this.eventBus.on('DataStore.variableDel', this.onVariableDel.bind(this));
     }
     SocketRouter.prototype.filterPath = function (url) {
-        return new URI(url).path();
+        return '/' + new URI(url).segment().filter(function (a) {
+            return a !== '';
+        }).join('/');
     };
 
     SocketRouter.prototype.onVariableDel = function (v) {
@@ -47,6 +50,23 @@ var SocketRouter = (function () {
     SocketRouter.prototype.setAction = function (req) {
         var path = this.filterPath(req.data.path);
         this.dataStore.set(path, req.data.value).catch(function (err) {
+            console.log(err);
+        });
+    };
+
+    SocketRouter.prototype.delAction = function (req) {
+        var _this = this;
+        var path = this.filterPath(req.data.path);
+        var child;
+
+        this.dataStore.get(path)(function (v) {
+            return child = v;
+        })(function () {
+            return _this.dataStore.del(path);
+        })(function () {
+            _this.eioApp.io.broadcast('del', child.raw);
+            _this.eioApp.io.broadcast('child_removed', child.raw);
+        }).catch(function (err) {
             console.log(err);
         });
     };

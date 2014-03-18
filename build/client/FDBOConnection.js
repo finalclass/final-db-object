@@ -2,7 +2,6 @@
 ///<reference path="FinalDBObject.ts"/>
 ///<reference path="FDBOHash.ts"/>
 ///<reference path="FDBOEvent.ts"/>
-///<reference path="FDBOChildAddedEvent.ts"/>
 var FDBOConnection = (function () {
     function FDBOConnection(serverURL) {
         this.serverURL = serverURL;
@@ -10,6 +9,8 @@ var FDBOConnection = (function () {
         this._socket = io.connect(this.serverURL);
         this.socket.on('value', this.onValue.bind(this));
         this.socket.on('child_added', this.onChildAdded.bind(this));
+        this.socket.on('child_removed', this.onChildRemoved.bind(this));
+        this.socket.on('del', this.onDel.bind(this));
     }
     FDBOConnection.getConnection = function (uri) {
         var serverURL = new URI(uri).hash('').path('').query('').toString();
@@ -47,6 +48,10 @@ var FDBOConnection = (function () {
         });
     };
 
+    FDBOConnection.prototype.del = function (url) {
+        this.socket.emit('del', { path: new URI(url).toString() });
+    };
+
     FDBOConnection.prototype.registerObject = function (object) {
         if (!this.hash.has(object)) {
             this.hash.add(object);
@@ -61,10 +66,9 @@ var FDBOConnection = (function () {
     // ---------------------------
     FDBOConnection.prototype.onValue = function (data) {
         var obj = this.hash.get(data.path || '');
-
         if (obj) {
             obj.silentSetValue(data.value);
-            obj.emit(new FDBOEvent('value'));
+            obj.emit(new FDBOEvent(FDBOEvent.VALUE, obj));
         }
     };
 
@@ -72,7 +76,28 @@ var FDBOConnection = (function () {
         var child = new FinalDBObject(this.serverURL + '/' + data.path, data.value);
         var parent = child.parent;
         if (parent) {
-            parent.emit(new FDBOChildAddedEvent('child_added', child));
+            parent.emit(new FDBOEvent(FDBOEvent.CHILD_ADDED, child));
+        }
+    };
+
+    FDBOConnection.prototype.onChildRemoved = function (data) {
+        if (this.hash.has(data.path)) {
+            this.delAndEmitDeleted(data.path);
+        }
+    };
+
+    FDBOConnection.prototype.delAndEmitDeleted = function (path) {
+        var child = this.hash.get(path);
+        if (child.parent) {
+            child.parent.emit(new FDBOEvent(FDBOEvent.CHILD_REMOVED, child));
+        }
+        child.emit(new FDBOEvent(FDBOEvent.DELETED, child));
+        this.hash.del(path);
+    };
+
+    FDBOConnection.prototype.onDel = function (data) {
+        if (this.hash.has(data.path)) {
+            this.delAndEmitDeleted(data.path);
         }
     };
     FDBOConnection.connections = {};

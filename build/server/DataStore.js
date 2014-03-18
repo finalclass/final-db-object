@@ -60,8 +60,9 @@ var DataStore = (function () {
     };
 
     DataStore.prototype.normalizeVariable = function (v, path) {
-        v.path = v.path || path;
-        v.parent = v.parent || this.findParentPath(v.path);
+        v.raw.path = v.path || path;
+        v.raw.parent = v.parent || this.findParentPath(v.path);
+        v.raw.type = v.type || 'object';
         return v;
     };
 
