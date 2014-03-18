@@ -56,8 +56,6 @@ var FDBOConnection = (function () {
         if (!this.hash.has(object)) {
             this.hash.add(object);
             this.get(object.uri);
-        } else {
-            this.hash.add(object);
         }
     };
 
@@ -65,7 +63,7 @@ var FDBOConnection = (function () {
     // Socket responders
     // ---------------------------
     FDBOConnection.prototype.onValue = function (data) {
-        var obj = this.hash.get(data.path || '');
+        var obj = this.hash.get(data.path);
         if (obj) {
             obj.silentSetValue(data.value);
             obj.emit(new FDBOEvent(FDBOEvent.VALUE, obj));

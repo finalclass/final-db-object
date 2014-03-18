@@ -47,10 +47,9 @@
     });
 
     todosModel.on('child_added', function onTodosChildAdded(event) {
-      var $todo = $todoTpl.clone(true);
       var todo = event.object;
-
-      $todo.attr('id', 'task-' + todo.name);
+      var $todo = $todoTpl.clone(true)
+        .attr('id', 'task-' + todo.name);
 
       todo.child('isDone').on('value', function () {
         $todo.find('.task-is-done').prop('checked', todo.child('isDone').value);
@@ -76,14 +75,19 @@
   });
 
   </script>
+  <style>
+  .todo {
+    display: block;
+  }
+  </style>
 </head>
 <body>
   
   <script type="text/template" id="todo-template">
-  <div class="todo">
+  <label class="todo">
     <input type="checkbox" class="task-is-done">
     <span class="task-name"></span>
-  </div>
+  </label>
   </script>
 
   <div class="container">

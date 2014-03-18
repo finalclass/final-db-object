@@ -78,7 +78,7 @@ class FDBOHash {
     if (!this.has(path)) {
       return new FinalDBObject(url);
     }
-    return this.get(path);
+    return this.data[path];
   }
 
 }

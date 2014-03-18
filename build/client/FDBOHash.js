@@ -72,7 +72,7 @@ var FDBOHash = (function () {
         if (!this.has(path)) {
             return new FinalDBObject(url);
         }
-        return this.get(path);
+        return this.data[path];
     };
     return FDBOHash;
 })();
