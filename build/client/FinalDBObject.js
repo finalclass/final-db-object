@@ -24,6 +24,20 @@ var FinalDBObject = (function (_super) {
         configurable: true
     });
 
+    FinalDBObject.prototype.on = function (message, callback) {
+        _super.prototype.on.call(this, message, callback);
+        if (message === 'value' || message === 'child_added') {
+            this.connection.get(this.uri);
+        }
+    };
+
+    FinalDBObject.prototype.once = function (message, callback) {
+        _super.prototype.once.call(this, message, callback);
+        if (message === 'value' || message === 'child_added') {
+            this.connection.get(this.uri);
+        }
+    };
+
     Object.defineProperty(FinalDBObject.prototype, "uri", {
         get: function () {
             return this.url;

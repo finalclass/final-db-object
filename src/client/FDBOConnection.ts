@@ -61,7 +61,6 @@ class FDBOConnection {
   public registerObject(object:FinalDBObject) : void {
     if (!this.hash.has(object)) {
       this.hash.add(object);
-      this.get(object.uri);
     }
   }
 

@@ -55,7 +55,6 @@ var FDBOConnection = (function () {
     FDBOConnection.prototype.registerObject = function (object) {
         if (!this.hash.has(object)) {
             this.hash.add(object);
-            this.get(object.uri);
         }
     };
 

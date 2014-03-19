@@ -21,6 +21,20 @@ class FinalDBObject extends FDBOEventEmitter {
     return FDBOConnection.getConnection(this.url);
   }
 
+  public on(message:string, callback:(event:FDBOEvent)=>void) : void {
+    super.on(message, callback);
+    if (message === 'value' || message === 'child_added') {
+      this.connection.get(this.uri);
+    }
+  }
+
+  public once(message:string, callback:(event:FDBOEvent)=>void) : void {
+    super.once(message, callback);
+    if (message === 'value' || message === 'child_added') {
+      this.connection.get(this.uri);
+    }
+  }
+
   public get uri() : URI {
     return this.url;
   }

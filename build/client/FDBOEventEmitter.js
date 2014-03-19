@@ -2,6 +2,7 @@
 ///<reference path="FDBOEvent.ts"/>
 ///<reference path="IFDBOListener.ts"/>
 ///<reference path="IFDBOEvent.ts"/>
+///<reference path="IFDBOListenerDescription.ts"/>
 var FDBOEventEmitter = (function () {
     function FDBOEventEmitter() {
         this._listeners = Object.create(null);
@@ -15,20 +16,32 @@ var FDBOEventEmitter = (function () {
 
     FDBOEventEmitter.prototype.on = function (eventType, listener) {
         var listeners = this.getAllListeners(eventType);
-        listeners.push(listener);
+        listeners.push({ listener: listener });
+    };
+
+    FDBOEventEmitter.prototype.once = function (eventType, listener) {
+        var listeners = this.getAllListeners(eventType);
+        listeners.push({ listener: listener, once: true });
     };
 
     FDBOEventEmitter.prototype.off = function (eventType, listener) {
         var listeners = this.getAllListeners(eventType);
-        listeners.splice(listeners.indexOf(listener), 1);
+        for (var i = 0; i < listeners.length; i += 1) {
+            if (listeners[i].listener === listener) {
+                break;
+            }
+        }
+        listeners.splice(i, 1);
     };
 
     FDBOEventEmitter.prototype.emit = function (event) {
         var _this = this;
         this.getAllListeners(event.type).forEach(function (listener) {
-            return listener.call(_this, event);
+            listener.listener.call(_this, event);
+            if (listener.once) {
+                _this.off(event.type, listener.listener);
+            }
         });
-        2;
     };
 
     FDBOEventEmitter.prototype.hashEventListener = function (eventType) {

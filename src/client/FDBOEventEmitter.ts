@@ -2,16 +2,17 @@
 ///<reference path="FDBOEvent.ts"/>
 ///<reference path="IFDBOListener.ts"/>
 ///<reference path="IFDBOEvent.ts"/>
+///<reference path="IFDBOListenerDescription.ts"/>
 
 class FDBOEventEmitter {
   
-  private _listeners:HashTable<IFDBOListener[]>;
+  private _listeners:HashTable<IFDBOListenerDescription[]>;
 
   constructor() {
     this._listeners = Object.create(null);
   }
 
-  private getAllListeners(eventType:string) : IFDBOListener[] {
+  private getAllListeners(eventType:string) : IFDBOListenerDescription[] {
     if (!this._listeners[eventType]) {
       this._listeners[eventType] = [];
     }
@@ -19,18 +20,33 @@ class FDBOEventEmitter {
   }
 
   public on(eventType:string, listener:IFDBOListener) : void {
-    var listeners:IFDBOListener[] = this.getAllListeners(eventType);
-    listeners.push(listener);
+    var listeners:IFDBOListenerDescription[] = this.getAllListeners(eventType);
+    listeners.push({listener: listener});
+  }
+
+  public once(eventType:string, listener:IFDBOListener) : void {
+    var listeners:IFDBOListenerDescription[] = this.getAllListeners(eventType);
+    listeners.push({listener: listener, once: true});
   }
 
   public off(eventType:string, listener:IFDBOListener) : void {
-    var listeners:IFDBOListener[] = this.getAllListeners(eventType);
-    listeners.splice(listeners.indexOf(listener), 1);
+    var listeners:IFDBOListenerDescription[] = this.getAllListeners(eventType);
+    for (var i:number = 0; i < listeners.length; i += 1) {
+      if (listeners[i].listener === listener) {
+        break;
+      }
+    }
+    listeners.splice(i, 1);
   }
 
   public emit(event:IFDBOEvent) : void {
     this.getAllListeners(event.type)
-      .forEach((listener:IFDBOListener) => listener.call(this, event));2
+      .forEach((listener:IFDBOListenerDescription) => {
+        listener.listener.call(this, event);
+        if (listener.once) {
+          this.off(event.type, listener.listener);
+        }
+      });
   }
 
   public hashEventListener(eventType:string) : boolean {
