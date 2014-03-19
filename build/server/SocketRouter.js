@@ -49,6 +49,8 @@ var SocketRouter = (function () {
 
     SocketRouter.prototype.setAction = function (req) {
         var path = this.filterPath(req.data.path);
+        console.log('set', path, req.data.value);
+
         this.dataStore.set(path, req.data.value).catch(function (err) {
             console.log(err);
         });
@@ -58,6 +60,8 @@ var SocketRouter = (function () {
         var _this = this;
         var path = this.filterPath(req.data.path);
         var child;
+
+        console.log('del', path);
 
         this.dataStore.get(path)(function (v) {
             return child = v;

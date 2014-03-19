@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat</title>
+  <script src="/jquery.js"></script>
+  <script src="/fdbo/dev/fdbo.js"></script>
+  <script>
+
+  //////////////////////////////////
+  /// Utils 
+  //////////////////////////////////    
+  function gnerateRandomId() {
+    var d = new Date().getTime().toString(36);
+    var r = Math.floor(Math.random() * 1e6).toString(36);
+    return d + r;
+  }
+
+  function MessageView() {
+    this.$view = $($('#message-template').html());
+    this.$author = this.$view.find('.message-author');
+    this.$body = this.$view.find('.message-body');
+    this.$date = this.$view.find('.message-date');
+  }
+
+  MessageView.prototype.setAuthor = function (name) {
+    this.$author.text(name);
+  };
+
+  MessageView.prototype.setBody = function (body) {
+    this.$body.text(body);
+  };
+
+  MessageView.prototype.setDate = function (time) {
+    var date = new Date(time);
+    this.$date.text(date.getFullYear() + '.' + (date.getMonth() + 1) + '.' + date.getDate() 
+      + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds());
+  };
+
+  //////////////////////////////////
+  /// View
+  //////////////////////////////////
+  function View() {
+    this.$chatMessages = $('.chat-messages');
+    this.$newMessageForm = $('.new-message-form');
+    this.$userNameInput = $('.user-name');
+    this.$userMessageInput = $('.user-message');
+    this.$submitNewMessageButton = $('.submit-new-message');
+  }
+
+  View.prototype.getUserName = function () {
+    return this.$userNameInput.val();
+  };
+
+  View.prototype.setUserName = function (userName) {
+    this.$userNameInput.val(userName);
+  };
+
+  View.prototype.getUserMessage = function () {
+    return this.$userMessageInput.val();
+  };
+
+  View.prototype.setUserMessage = function (userMessage) {
+    this.$userMessageInput.val(userMessage);
+  };
+
+  View.prototype.addMessage = function (msgView) {
+    this.$chatMessages.append(msgView.$view);
+  };
+
+  //////////////////////////////////
+  /// Controller
+  //////////////////////////////////
+  
+  function Controller(view, model) {
+    this.view = view;
+    this.model = model;
+
+    this.model.on('child_added', this.onNewChatMessage.bind(this));
+    this.view.$submitNewMessageButton.on('click', this.onNewMessageFormSubmit.bind(this));
+  }
+
+  Controller.prototype.onNewChatMessage = function(event) {
+    var msgView = new MessageView();
+    var msg = event.object;
+
+    msg.child('author').on('value', function () {
+      msgView.setAuthor(msg.child('author').value);
+    });
+
+    msg.child('message').on('value', function () {
+      msgView.setBody(msg.child('message').value);
+    });
+
+    msg.child('date').on('value', function () {
+      msgView.setDate(msg.child('date').value);
+    });
+
+    this.view.addMessage(msgView);
+  };
+
+  Controller.prototype.onNewMessageFormSubmit = function (event) {
+    event.preventDefault();
+
+    if (this.view.getUserMessage().length === 0 || this.view.getUserName().length === 0) {
+      return;
+    }
+
+    this.model.child(gnerateRandomId()).set({
+      author: this.view.getUserName(),
+      message: this.view.getUserMessage(),
+      date: new Date().getTime()
+    });
+
+    this.view.setUserMessage('');
+  };
+
+  //////////////////////////////////
+  /// initialization
+  //////////////////////////////////
+  $(function () {
+    var model = new FinalDBObject('http://localhost:8181/fdbo/chat');
+    var view = new View();
+    var controller = new Controller(view, model);
+  });
+  </script>
+  <style>
+
+  .message {
+    font-family: Arial sans-serif;
+  }
+
+  .message-author {
+    font-weight: bold;
+  }
+
+  .message-date {
+    color: #999;
+    font-style: italic;
+    font-size: 12px;
+  }
+  
+  </style>
+</head>
+<body>
+
+  <script type="text/template" id="message-template">
+  <div class="message">
+    <span class="message-author"></span>:
+    <span class="message-body"></span>
+    <span class="message-date"></span>
+  </div>
+  </script>
+  
+  <div class="chat-messages">
+    <!-- #message-template instances goes here -->
+  </div>
+
+  <form class="new-message-form">
+    <input type="text" class="user-name" placeholder="author...">
+    <input type="text" class="user-message" placeholder="message...">
+    <input type="submit" class="submit-new-message" value="Send!">
+  </form>
+
+</body>
+</html>

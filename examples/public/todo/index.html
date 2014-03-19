@@ -51,15 +51,15 @@
       var $todo = $todoTpl.clone(true)
         .attr('id', 'task-' + todo.name);
 
-      todo.child('isDone').on('value', function () {
+      todo.child('isDone').on('value', function onIsDoneValue() {
         $todo.find('.task-is-done').prop('checked', todo.child('isDone').value);
       });
 
-      todo.child('name').on('value', function () {
+      todo.child('name').on('value', function onNameValue() {
         $todo.find('.task-name').text(todo.child('name').value);
       });
 
-      $todo.find('.task-is-done').on('change', function (event) {
+      $todo.find('.task-is-done').on('change', function onTaskIsDoneCheckboxChange(event) {
         event.preventDefault();
         event.stopPropagation();
         todo.child('isDone').set($(event.target).is(':checked'));

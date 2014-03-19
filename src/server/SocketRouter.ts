@@ -55,6 +55,8 @@ class SocketRouter {
 
   private setAction(req:expressIO.SocketRequest) : void {
     var path = this.filterPath(req.data.path);
+    console.log('set', path, req.data.value);
+    
     this.dataStore.set(path, req.data.value)
     .catch((err:Error) => {
       console.log(err);
@@ -64,6 +66,8 @@ class SocketRouter {
   private delAction(req:expressIO.SocketRequest) : void {
     var path = this.filterPath(req.data.path);
     var child:IVariable;
+
+    console.log('del', path);
 
     this.dataStore.get(path)
     ((v:IVariable) => child = v)

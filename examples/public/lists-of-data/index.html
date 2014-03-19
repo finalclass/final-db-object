@@ -14,7 +14,7 @@
     var result = {};
 
     fdbo.on('child_added', function (event) {
-      result[event.child.name] = event.child.value;
+      result[event.object.name] = event.object.value;
       if (result.a === 'aaa' && result.b === 'bbb' && result.c === 'ccc') {
         $('h1').text('works');
       }
