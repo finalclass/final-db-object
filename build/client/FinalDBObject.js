@@ -16,6 +16,12 @@ var FinalDBObject = (function (_super) {
         this.connection.registerObject(this);
         this._value = initialValue;
     }
+    FinalDBObject.generateRandomId = function () {
+        var d = new Date().getTime().toString(36);
+        var r = Math.floor(Math.random() * 1e8).toString(36);
+        return d + r;
+    };
+
     Object.defineProperty(FinalDBObject.prototype, "connection", {
         get: function () {
             return FDBOConnection.getConnection(this.url);

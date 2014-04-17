@@ -1,6 +1,8 @@
 /// <reference path="node.d.ts"/>
 /// <reference path="sqlite3.d.ts"/>
-/// <reference path="express.io.d.ts"/>
+/// <reference path="express.d.ts"/>
+/// <reference path="socket.io-server.d.ts"/>
+/// <reference path="socket.io-router.d.ts"/>
 /// <reference path="try.d.ts"/>
 /// <reference path="URI.d.ts"/>
 

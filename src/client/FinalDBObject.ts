@@ -17,6 +17,12 @@ class FinalDBObject extends FDBOEventEmitter {
     this._value = initialValue;
   }
 
+  public static generateRandomId() {
+    var d = new Date().getTime().toString(36);
+    var r = Math.floor(Math.random() * 1e8).toString(36);
+    return d + r;
+  }
+
   private get connection() : FDBOConnection {
     return FDBOConnection.getConnection(this.url);
   }

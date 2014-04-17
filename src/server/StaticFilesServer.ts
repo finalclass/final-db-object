@@ -1,5 +1,5 @@
 import Config = require('./Config');
-import expressIO = require('express.io');
+import express = require('express');
 import StaticFile = require('./StaticFile');
 import fs = require('fs');
 import Try = require('try');
@@ -9,7 +9,7 @@ class StaticFilesServer {
   private clientScripts:StaticFile[] = [
     new StaticFile('try.js', 'node_modules/try/Try.js'),
     new StaticFile('socket.io.js', 
-      'node_modules/express.io/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js'),
+      'node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js'),
     new StaticFile('URI.js', 'node_modules/URIjs/src/URI.js'),
     new StaticFile('FDBOUtils.js', 'build/client/FDBOUtils.js'),
     new StaticFile('FDBOEvent.js', 'build/client/FDBOEvent.js'),
@@ -21,11 +21,11 @@ class StaticFilesServer {
 
   constructor(
     private config:Config, 
-    private eioApp:expressIO.Application
+    private expressApp:express.Application
   ) {
-    this.eioApp.get('/' + this.config.routesPrefix + '/dev/fdbo.js', this.getScriptLoaderAction.bind(this));
-    this.eioApp.get('/' + this.config.routesPrefix + '/fdbo.js', this.getFDBOScriptAction.bind(this));
-    this.eioApp.get('/' + this.config.routesPrefix + '/js/:scriptName', this.getScriptAction.bind(this));
+    this.expressApp.get('/' + this.config.routesPrefix + '/dev/fdbo.js', this.getScriptLoaderAction.bind(this));
+    this.expressApp.get('/' + this.config.routesPrefix + '/fdbo.js', this.getFDBOScriptAction.bind(this));
+    this.expressApp.get('/' + this.config.routesPrefix + '/js/:scriptName', this.getScriptAction.bind(this));
   }
 
   private findStaticFileByName(name:string) : StaticFile {
@@ -37,7 +37,7 @@ class StaticFilesServer {
     return null;
   }
 
-  private getScriptAction(req:expressIO.Request, res:expressIO.Response, next:(err?:Error)=>void) : void {
+  private getScriptAction(req:express.Request, res:express.Response, next:(err?:Error)=>void) : void {
     var staticFile:StaticFile = this.findStaticFileByName(req.params.scriptName);
     if (!staticFile) {
       res.status(500).end();
@@ -52,7 +52,7 @@ class StaticFilesServer {
       + this.config.routesPrefix + '/js/' + staticFile.name + '"></script>\')';
   }
 
-  private getScriptLoaderAction(req:expressIO.Request, res:expressIO.Response, next:(err?:Error)=>void) : void {
+  private getScriptLoaderAction(req:express.Request, res:express.Response, next:(err?:Error)=>void) : void {
     res.setHeader('Content-type', 'application/javascript');
     var docWrites:string[] = this.clientScripts
       .map((staticFile:StaticFile) => this.getDocWriteForStaticFile(staticFile));
@@ -60,7 +60,7 @@ class StaticFilesServer {
     res.end();
   }
 
-  private getFDBOScriptAction(req:expressIO.Request, res:expressIO.Response, next:(err?:Error)=>void) : void {
+  private getFDBOScriptAction(req:express.Request, res:express.Response, next:(err?:Error)=>void) : void {
     res.setHeader('Content-type', 'application/javascript');
 
     var t = Try();

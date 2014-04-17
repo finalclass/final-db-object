@@ -4,36 +4,43 @@ var Environment = require('./Environment');
 var EventBus = require('./EventBus');
 var DataStore = require('./DataStore');
 var HTTPRouter = require('./HTTPRouter');
-var SocketRouter = require('./SocketRouter');
-var Try = require('try');
-var expressIO = require('express.io');
+var SocketRoutesManager = require('./SocketRoutesManager');
+var sockRouter = require('socket.io-router');
 
+var express = require('express');
+var socketIO = require('socket.io');
+var http = require('http');
 var domain = require('domain');
 var StaticFilesServer = require('./StaticFilesServer');
 
 var Server = (function () {
-    function Server(configData, env) {
+    function Server(configData, env, expressApp, httpServer, io) {
         this._config = new Config(configData);
         this.env = env || 'development';
-        this._eioApp = expressIO();
-        this.eioApp.http().io();
-        this.configureExpressApp();
+        this._expressApp = expressApp || express();
+        this.httpServer = httpServer || http.createServer(this._expressApp);
         this.eventBus = new EventBus();
+        this.io = io || socketIO.listen(this.httpServer);
+        this.configureExpressApp();
         this.dataStore = new DataStore(this.eventBus, this.config);
-        this.staticFilesServer = new StaticFilesServer(this.config, this.eioApp);
-        this.httpRouter = new HTTPRouter(this.eioApp, this.dataStore, this.config);
-        this.socketRouter = new SocketRouter(this.eioApp, this.dataStore, this.eventBus, this.config);
+        this.staticFilesServer = new StaticFilesServer(this.config, this.expressApp);
+        this.httpRouter = new HTTPRouter(this.expressApp, this.dataStore, this.config);
+        this.socketRouter = new sockRouter.SocketRouter(this.io);
+        this.socketRoutesManager = new SocketRoutesManager(this.socketRouter, this.dataStore, this.eventBus, this.config);
 
-        this.eventBus.on('DataStore.initError', this.onError);
+        this.eventBus.on('DataStore.initError', this.onError.bind(this));
+        this.eventBus.on('DataStore.initComplete', this.onDataStoreInitComplete.bind(this));
+
+        this.dataStore.init();
     }
-    Object.defineProperty(Server.prototype, "eioApp", {
+    Object.defineProperty(Server.prototype, "expressApp", {
         // -----------------------------------------------------
         //
         // Properties
         //
         // -----------------------------------------------------
         get: function () {
-            return this._eioApp;
+            return this._expressApp;
         },
         enumerable: true,
         configurable: true
@@ -68,19 +75,23 @@ var Server = (function () {
         console.log('FinalDBObject error', err, err.stack);
     };
 
+    Server.prototype.onDataStoreInitComplete = function () {
+        this.eventBus.emit('initComplete');
+    };
+
     // -----------------------------------------------------
     //
     // Private methods
     //
     // -----------------------------------------------------
     Server.prototype.configureExpressApp = function () {
-        this.eioApp.use(expressIO.bodyParser({
+        this.expressApp.use(express.bodyParser({
             keepExtensions: true,
             uploadDir: __dirname + '/var/files',
             strict: false
         }));
-        this.eioApp.use(this.domainSupportMiddleware.bind(this));
-        this.eioApp.use(this.httpErrorHandler.bind(this));
+        this.expressApp.use(this.domainSupportMiddleware.bind(this));
+        this.expressApp.use(this.httpErrorHandler.bind(this));
     };
 
     Server.prototype.httpErrorHandler = function (err, req, res, next) {
@@ -103,11 +114,8 @@ var Server = (function () {
     // -----------------------------------------------------
     Server.prototype.listen = function () {
         var _this = this;
-        this.eventBus.emit('Server.listenRequest');
-        this.dataStore.init()(function () {
-            _this.eioApp.listen(_this.config.port, Try.pause());
-        })(function () {
-            return _this.eventBus.emit('listen');
+        this.httpServer.listen(this.config.port, function () {
+            _this.eventBus.emit('listen');
         });
     };
 

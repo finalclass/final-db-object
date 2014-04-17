@@ -3,12 +3,12 @@ var fs = require('fs');
 var Try = require('try');
 
 var StaticFilesServer = (function () {
-    function StaticFilesServer(config, eioApp) {
+    function StaticFilesServer(config, expressApp) {
         this.config = config;
-        this.eioApp = eioApp;
+        this.expressApp = expressApp;
         this.clientScripts = [
             new StaticFile('try.js', 'node_modules/try/Try.js'),
-            new StaticFile('socket.io.js', 'node_modules/express.io/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js'),
+            new StaticFile('socket.io.js', 'node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js'),
             new StaticFile('URI.js', 'node_modules/URIjs/src/URI.js'),
             new StaticFile('FDBOUtils.js', 'build/client/FDBOUtils.js'),
             new StaticFile('FDBOEvent.js', 'build/client/FDBOEvent.js'),
@@ -17,9 +17,9 @@ var StaticFilesServer = (function () {
             new StaticFile('FDBOConnection.js', 'build/client/FDBOConnection.js'),
             new StaticFile('FinalDBObject.js', 'build/client/FinalDBObject.js')
         ];
-        this.eioApp.get('/' + this.config.routesPrefix + '/dev/fdbo.js', this.getScriptLoaderAction.bind(this));
-        this.eioApp.get('/' + this.config.routesPrefix + '/fdbo.js', this.getFDBOScriptAction.bind(this));
-        this.eioApp.get('/' + this.config.routesPrefix + '/js/:scriptName', this.getScriptAction.bind(this));
+        this.expressApp.get('/' + this.config.routesPrefix + '/dev/fdbo.js', this.getScriptLoaderAction.bind(this));
+        this.expressApp.get('/' + this.config.routesPrefix + '/fdbo.js', this.getFDBOScriptAction.bind(this));
+        this.expressApp.get('/' + this.config.routesPrefix + '/js/:scriptName', this.getScriptAction.bind(this));
     }
     StaticFilesServer.prototype.findStaticFileByName = function (name) {
         for (var i = this.clientScripts.length; i--;) {

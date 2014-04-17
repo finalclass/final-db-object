@@ -2,14 +2,14 @@
 ///<reference path="../types/hash-table.d.ts"/>
 
 import DataStore = require('./DataStore');
-import expressIO = require('express.io');
+import express = require('express');
 import Config = require('./Config');
 import Variable = require('./Variable');
 
 class HTTPRouter {
 
   constructor(
-    private expressApp:expressIO.Application,
+    private expressApp:express.Application,
     private dataStore:DataStore,
     private config:Config
   ) {
@@ -28,7 +28,7 @@ class HTTPRouter {
       this.delAction.bind(this));
   }
 
-  private findByPathMiddleware(req:expressIO.Request, res:expressIO.Response, next:(err?:Error)=>void) : void {
+  private findByPathMiddleware(req:express.Request, res:express.Response, next:(err?:Error)=>void) : void {
     this.dataStore.get(this.config.routesPrefix + '/' + <string>req.params.path)
     ((v:Variable) => {
       if (!v) {
@@ -42,23 +42,23 @@ class HTTPRouter {
     .catch(this.getErrorHandlerFunction(req, res));
   }
 
-  private delAction(req:expressIO.Request, res:expressIO.Response) : void {
+  private delAction(req:express.Request, res:express.Response) : void {
     this.dataStore.del(req.params.variable.path)
     (()=> res.send(204))
     .catch(this.getErrorHandlerFunction(req, res));
   }
 
-  private getAction(req:expressIO.Request, res:expressIO.Response) : void {
+  private getAction(req:express.Request, res:express.Response) : void {
     res.json(200, req.params.variable.raw);
   }
 
-  private setAction(req:expressIO.Request, res:expressIO.Response) : void {
+  private setAction(req:express.Request, res:express.Response) : void {
     this.dataStore.set(this.config.routesPrefix + '/' + <string>req.params.path, req.body)
     (() => res.send(204))
     .catch(this.getErrorHandlerFunction(req, res));
   }
 
-  private getErrorHandlerFunction(req:expressIO.Request, res:expressIO.Response) : ()=>void {
+  private getErrorHandlerFunction(req:express.Request, res:express.Response) : ()=>void {
     return (err?:Error, ...args) => {
       if (err) {
         console.log('HTTPRouter ERROR', err, (<any>err).stack);

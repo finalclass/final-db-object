@@ -5,9 +5,11 @@ import Environment = require('./Environment');
 import EventBus = require('./EventBus');
 import DataStore = require('./DataStore');
 import HTTPRouter = require('./HTTPRouter');
-import SocketRouter = require('./SocketRouter');
+import SocketRoutesManager = require('./SocketRoutesManager');
+import sockRouter = require('socket.io-router');
 import Try = require('try');
-import expressIO = require('express.io');
+import express = require('express');
+import socketIO = require('socket.io');
 import http = require('http');
 import domain = require('domain');
 import StaticFilesServer = require('./StaticFilesServer');
@@ -16,25 +18,39 @@ class Server {
 
   private _config:Config;
   private eventBus:EventBus;
-  private _eioApp:expressIO.Application;
+  private _expressApp:express.Application;
+  private io:socketIO.SocketManager;
+  private httpServer:http.Server;
   private dataStore:DataStore;
   private httpRouter:HTTPRouter;
-  private socketRouter:SocketRouter;
+  private socketRouter:sockRouter.SocketRouter;
+  private socketRoutesManager:SocketRoutesManager;
   private staticFilesServer:StaticFilesServer;
 
-  constructor(configData:IConfig, env?:string) {
+  constructor(
+    configData:IConfig, 
+    env?:string,
+    expressApp?:express.Application, 
+    httpServer?:http.Server,
+    io?:socketIO.SocketManager
+  ) {
     this._config = new Config(configData);
     this.env = env || 'development';
-    this._eioApp = expressIO();
-    this.eioApp.http().io();
-    this.configureExpressApp();
+    this._expressApp = expressApp || express();
+    this.httpServer = httpServer || http.createServer(this._expressApp);
     this.eventBus = new EventBus();
+    this.io = io || socketIO.listen(this.httpServer);
+    this.configureExpressApp();
     this.dataStore = new DataStore(this.eventBus, this.config);
-    this.staticFilesServer = new StaticFilesServer(this.config, this.eioApp);
-    this.httpRouter = new HTTPRouter(this.eioApp, this.dataStore, this.config);
-    this.socketRouter = new SocketRouter(this.eioApp, this.dataStore, this.eventBus, this.config);
+    this.staticFilesServer = new StaticFilesServer(this.config, this.expressApp);
+    this.httpRouter = new HTTPRouter(this.expressApp, this.dataStore, this.config);
+    this.socketRouter = new sockRouter.SocketRouter(this.io);
+    this.socketRoutesManager = new SocketRoutesManager(this.socketRouter, this.dataStore, this.eventBus, this.config);
     
-    this.eventBus.on('DataStore.initError', this.onError);
+    this.eventBus.on('DataStore.initError', this.onError.bind(this));
+    this.eventBus.on('DataStore.initComplete', this.onDataStoreInitComplete.bind(this));
+
+    this.dataStore.init();
   }
 
   // -----------------------------------------------------
@@ -43,8 +59,8 @@ class Server {
   //
   // -----------------------------------------------------
 
-  public get eioApp() : expressIO.Application {
-    return this._eioApp;
+  public get expressApp() : express.Application {
+    return this._expressApp;
   }
 
   public get config() : Config {
@@ -69,6 +85,10 @@ class Server {
     console.log('FinalDBObject error', err, (<any>err).stack);
   }
 
+  private onDataStoreInitComplete() : void {
+    this.eventBus.emit('initComplete');
+  }
+
   // -----------------------------------------------------
   // 
   // Private methods
@@ -76,21 +96,21 @@ class Server {
   // -----------------------------------------------------
   
   private configureExpressApp() : void {
-    this.eioApp.use(expressIO.bodyParser({
+    this.expressApp.use(express.bodyParser({
       keepExtensions: true, 
       uploadDir: __dirname + '/var/files',
       strict: false
     }));
-    this.eioApp.use(this.domainSupportMiddleware.bind(this));
-    this.eioApp.use(this.httpErrorHandler.bind(this));
+    this.expressApp.use(this.domainSupportMiddleware.bind(this));
+    this.expressApp.use(this.httpErrorHandler.bind(this));
   }
 
-  private httpErrorHandler(err:Error, req:expressIO.Request, res:expressIO.Response, next:(err?:Error)=>void) : void {
+  private httpErrorHandler(err:Error, req:express.Request, res:express.Response, next:(err?:Error)=>void) : void {
     console.log('HTTP_ERROR', err, (<any>err).stack);
     res.json(500, {status: 'error', reason: 'internal_server_error'});
   }
 
-  private domainSupportMiddleware(req:expressIO.Request, res:expressIO.Response, next:(err?:Error)=>void) : void {
+  private domainSupportMiddleware(req:express.Request, res:express.Response, next:(err?:Error)=>void) : void {
     var d = domain.create();
     d.add(<any>req);
     d.add(res);
@@ -105,12 +125,9 @@ class Server {
   // -----------------------------------------------------
   
   public listen() : void {
-    this.eventBus.emit('Server.listenRequest');
-    this.dataStore.init()
-    (() => {
-      this.eioApp.listen(this.config.port, Try.pause());
-    })
-    (() => this.eventBus.emit('listen'));
+    this.httpServer.listen(this.config.port, () => {
+      this.eventBus.emit('listen');
+    });
   }
 
   public on(eventType:string, callback:(...args)=>void) {
