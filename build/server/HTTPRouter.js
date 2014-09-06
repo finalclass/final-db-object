@@ -1,5 +1,3 @@
-///<reference path="../types/types-server.d.ts"/>
-///<reference path="../types/hash-table.d.ts"/>
 var HTTPRouter = (function () {
     function HTTPRouter(expressApp, dataStore, config) {
         this.expressApp = expressApp;
@@ -9,7 +7,7 @@ var HTTPRouter = (function () {
 
         this.expressApp.put('/' + this.config.routesPrefix + '/:path', this.setAction.bind(this));
 
-        this.expressApp.del('/' + this.config.routesPrefix + '/:path', this.findByPathMiddleware.bind(this), this.delAction.bind(this));
+        this.expressApp.delete('/' + this.config.routesPrefix + '/:path', this.findByPathMiddleware.bind(this), this.delAction.bind(this));
     }
     HTTPRouter.prototype.findByPathMiddleware = function (req, res, next) {
         this.dataStore.get(this.config.routesPrefix + '/' + req.params.path)(function (v) {

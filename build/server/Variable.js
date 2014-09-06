@@ -1,14 +1,8 @@
-///<reference path="../types/types-server.d.ts" />
 var Variable = (function () {
     function Variable(data, path) {
         this.initData(data, path);
     }
     Object.defineProperty(Variable.prototype, "path", {
-        // -----------------------------------------------------
-        //
-        // Accesssors
-        //
-        // -----------------------------------------------------
         get: function () {
             return this._raw.path;
         },

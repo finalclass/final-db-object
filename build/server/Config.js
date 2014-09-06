@@ -1,4 +1,3 @@
-///<reference path="../types/types-server.d.ts"/>
 var Environment = require('./Environment');
 
 var Config = (function () {
@@ -6,14 +5,6 @@ var Config = (function () {
         this.data = data;
     }
     Object.defineProperty(Config.prototype, "serverAddress", {
-        // -----------------------------------------------------
-        //
-        // Properties
-        //
-        // -----------------------------------------------------
-        // ---------------------------
-        // serverAddress
-        // ---------------------------
         get: function () {
             return this.protocol + '://' + this.host + ':' + this.port + '/' + this.routesPrefix;
         },
@@ -22,9 +13,6 @@ var Config = (function () {
     });
 
     Object.defineProperty(Config.prototype, "protocol", {
-        // ---------------------------
-        // protocol
-        // ---------------------------
         get: function () {
             return this.realConfig.protocol || 'http://';
         },
@@ -33,9 +21,6 @@ var Config = (function () {
     });
 
     Object.defineProperty(Config.prototype, "host", {
-        // ---------------------------
-        // host
-        // ---------------------------
         get: function () {
             return this.realConfig.host;
         },
@@ -44,9 +29,6 @@ var Config = (function () {
     });
 
     Object.defineProperty(Config.prototype, "env", {
-        // ---------------------------
-        // env
-        // ---------------------------
         get: function () {
             return this._env;
         },
@@ -60,9 +42,6 @@ var Config = (function () {
 
 
     Object.defineProperty(Config.prototype, "port", {
-        // ---------------------------
-        // port
-        // ---------------------------
         get: function () {
             return this.realConfig.port || 8181;
         },
@@ -71,9 +50,6 @@ var Config = (function () {
     });
 
     Object.defineProperty(Config.prototype, "dataStoreAdapter", {
-        // ---------------------------
-        // dataStoreAdapter
-        // ---------------------------
         get: function () {
             return this.realConfig.dataStoreAdapter;
         },
@@ -82,9 +58,6 @@ var Config = (function () {
     });
 
     Object.defineProperty(Config.prototype, "routesPrefix", {
-        // ---------------------------
-        // routesPrefix
-        // ---------------------------
         get: function () {
             return this.realConfig.routesPrefix || 'fdbo';
         },
@@ -93,9 +66,6 @@ var Config = (function () {
     });
 
     Object.defineProperty(Config.prototype, "dataStore", {
-        // ---------------------------
-        // dataStore
-        // ---------------------------
         get: function () {
             return this.realConfig.dataStore || {};
         },
@@ -103,11 +73,6 @@ var Config = (function () {
         configurable: true
     });
 
-    // -----------------------------------------------------
-    //
-    // Private methods
-    //
-    // -----------------------------------------------------
     Config.prototype.updateRealConfig = function () {
         this.realConfig = {};
         this.copyConfig(Environment.DEVELOPMENT, this.realConfig);

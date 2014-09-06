@@ -1,7 +1,3 @@
-///<reference path="../types/types-client.d.ts"/>
-///<reference path="FDBOEventEmitter.ts"/>
-///<reference path="FDBOConnection.ts"/>
-///<reference path="FDBOUtils.ts"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }

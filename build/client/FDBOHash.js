@@ -1,7 +1,3 @@
-///<reference path="../types/types-client.d.ts"/>
-///<reference path="FinalDBObject.ts"/>
-///<reference path="FDBOConnection.ts"/>
-///<reference path="FDBOUtils.ts"/>
 var FDBOHash = (function () {
     function FDBOHash(connection) {
         this.connection = connection;
@@ -43,16 +39,13 @@ var FDBOHash = (function () {
         var parentPath = FDBOUtils.getParentPath(new URI(path));
         var fObject = this.data[path];
 
-        //remove the object
         delete this.data[path];
 
-        //remove from parent's hash
         var index = this.byParent[parentPath].indexOf(fObject);
         if (index !== -1) {
             this.byParent[parentPath].splice(index, 1);
         }
 
-        //remove children
         if (this.byParent[path]) {
             this.byParent[path].forEach(function (v) {
                 return _this.del(v);

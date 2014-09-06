@@ -1,0 +1,43 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/node_modules/require-ts/src/RequireTS.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/require-ts/src/Compiler.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/require-ts/src/FilesManager.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/require-ts/src/index.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/require-ts/src/Config.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/require-ts/src/RequireTS.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/require-ts/src/Compiler.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/require-ts/src/FilesManager.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/require-ts/src/index.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/require-ts/src/Config.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/socket.io-router/src/SocketRoute.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/socket.io-router/src/SocketRoute.js" />
+      <root url="file://$PROJECT_DIR$/src/client/IFDBOEvent.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/socket.io-router/src/index.js" />
+      <root url="file://$PROJECT_DIR$/src/client/IFDBOListener.js" />
+      <root url="file://$PROJECT_DIR$/src/client/FDBOEvent.js" />
+      <root url="file://$PROJECT_DIR$/src/client/FDBOHash.js" />
+      <root url="file://$PROJECT_DIR$/src/server/HTTPRouter.js" />
+      <root url="file://$PROJECT_DIR$/src/server/DataStoreSQLiteAdapter.js" />
+      <root url="file://$PROJECT_DIR$/src/server/DataStore.js" />
+      <root url="file://$PROJECT_DIR$/src/server/VariablesCollection.js" />
+      <root url="file://$PROJECT_DIR$/src/server/StaticFilesServer.js" />
+      <root url="file://$PROJECT_DIR$/src/server/Server.js" />
+      <root url="file://$PROJECT_DIR$/src/server/EventBus.js" />
+      <root url="file://$PROJECT_DIR$/src/server/StaticFile.js" />
+      <root url="file://$PROJECT_DIR$/src/server/Variable.js" />
+      <root url="file://$PROJECT_DIR$/src/server/index.js" />
+      <root url="file://$PROJECT_DIR$/src/client/FDBOEventEmitter.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/socket.io-router/src/SocketRouter.js" />
+      <root url="file://$PROJECT_DIR$/src/server/Config.js" />
+      <root url="file://$PROJECT_DIR$/src/server/Environment.js" />
+      <root url="file://$PROJECT_DIR$/src/client/IFDBOListenerDescription.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/socket.io-router/src/SocketRequest.js" />
+      <root url="file://$PROJECT_DIR$/src/client/FDBOUtils.js" />
+      <root url="file://$PROJECT_DIR$/src/client/FinalDBObject.js" />
+      <root url="file://$PROJECT_DIR$/src/client/FDBOConnection.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

@@ -1,4 +1,4 @@
-var fdbo = require('../index.js');
+var fdbo = require('../build/server/index.js');
 var fs = require('fs');
 var express = require('express');
 

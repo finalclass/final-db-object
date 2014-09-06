@@ -1,5 +1,3 @@
-///<reference path="../types/types-client.d.ts"/>
-///<reference path="IFDBOEvent.ts"/>
 var FDBOEvent = (function () {
     function FDBOEvent(_type, object) {
         this._type = _type;

@@ -1,4 +1,3 @@
-///<reference path="../types/types-server.d.ts"/>
 var DataStoreSQLiteAdapter = require('./DataStoreSQLiteAdapter');
 
 var Try = require('try');

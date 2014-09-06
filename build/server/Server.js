@@ -1,4 +1,3 @@
-///<reference path="../types/types-server.d.ts"/>
 var Config = require('./Config');
 var Environment = require('./Environment');
 var EventBus = require('./EventBus');
@@ -12,6 +11,8 @@ var socketIO = require('socket.io');
 var http = require('http');
 var domain = require('domain');
 var StaticFilesServer = require('./StaticFilesServer');
+
+var bodyParser = require('body-parser');
 
 var Server = (function () {
     function Server(configData, env, expressApp, httpServer, io) {
@@ -34,11 +35,6 @@ var Server = (function () {
         this.dataStore.init();
     }
     Object.defineProperty(Server.prototype, "expressApp", {
-        // -----------------------------------------------------
-        //
-        // Properties
-        //
-        // -----------------------------------------------------
         get: function () {
             return this._expressApp;
         },
@@ -66,11 +62,6 @@ var Server = (function () {
     });
 
 
-    // -----------------------------------------------------
-    //
-    // Event Handlers
-    //
-    // -----------------------------------------------------
     Server.prototype.onError = function (err) {
         console.log('FinalDBObject error', err, err.stack);
     };
@@ -79,17 +70,8 @@ var Server = (function () {
         this.eventBus.emit('initComplete');
     };
 
-    // -----------------------------------------------------
-    //
-    // Private methods
-    //
-    // -----------------------------------------------------
     Server.prototype.configureExpressApp = function () {
-        this.expressApp.use(express.bodyParser({
-            keepExtensions: true,
-            uploadDir: __dirname + '/var/files',
-            strict: false
-        }));
+        this.expressApp.use(bodyParser.json());
         this.expressApp.use(this.domainSupportMiddleware.bind(this));
         this.expressApp.use(this.httpErrorHandler.bind(this));
     };
@@ -107,11 +89,6 @@ var Server = (function () {
         d.run(next);
     };
 
-    // -----------------------------------------------------
-    //
-    // Public methods
-    //
-    // -----------------------------------------------------
     Server.prototype.listen = function () {
         var _this = this;
         this.httpServer.listen(this.config.port, function () {

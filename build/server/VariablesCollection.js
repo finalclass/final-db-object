@@ -1,4 +1,3 @@
-///<reference path="../types/types-server.d.ts" />
 var Variable = require('./Variable');
 
 var VariablesCollection = (function () {

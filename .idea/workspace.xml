@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b1cbb5b2-abe9-4b18-824b-96b2f7d32caa" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/hash-table" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/socket.io-router" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/socket.io-server" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Gruntfile.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IConfig.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IConfig.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IDataStoreAdapter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IDataStoreAdapter.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IDataStoreConfig.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IDataStoreConfig.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IDataStoreSQLiteConfig.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IDataStoreSQLiteConfig.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IEnvironmentConfig.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IEnvironmentConfig.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IRawData.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IRawData.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IVariable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IVariable.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IVariablesCollection.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IVariablesCollection.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/SocketRoutesManager.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/SocketRoutesManager.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-client/typings/urijs/URI.d.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/body-parser/body-parser.d.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/final-db-object.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/final_db_object_node_modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/index.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/jquery/jquery.d.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/sel.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/sqlite3/sqlite3.d.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-client/typings/tsd.d.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/tsd.d.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-client/tsd.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/tsd.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/with-existing-express-app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/server/index.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/types/socket.io-server.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/types/sqlite3.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/types/types-client.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/types/types-server.d.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/tsreq/index.js" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/FDBOConnection.ts" afterPath="$PROJECT_DIR$/src-client/FDBOConnection.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/FDBOEvent.ts" afterPath="$PROJECT_DIR$/src-client/FDBOEvent.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/FDBOEventEmitter.ts" afterPath="$PROJECT_DIR$/src-client/FDBOEventEmitter.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/FDBOHash.ts" afterPath="$PROJECT_DIR$/src-client/FDBOHash.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/FDBOUtils.ts" afterPath="$PROJECT_DIR$/src-client/FDBOUtils.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/FinalDBObject.ts" afterPath="$PROJECT_DIR$/src-client/FinalDBObject.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/IFDBOEvent.ts" afterPath="$PROJECT_DIR$/src-client/IFDBOEvent.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/IFDBOListener.ts" afterPath="$PROJECT_DIR$/src-client/IFDBOListener.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/IFDBOListenerDescription.ts" afterPath="$PROJECT_DIR$/src-client/IFDBOListenerDescription.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/Config.ts" afterPath="$PROJECT_DIR$/src-server/Config.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/DataStore.ts" afterPath="$PROJECT_DIR$/src-server/DataStore.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/DataStoreSQLiteAdapter.ts" afterPath="$PROJECT_DIR$/src-server/DataStoreSQLiteAdapter.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/Environment.ts" afterPath="$PROJECT_DIR$/src-server/Environment.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/EventBus.ts" afterPath="$PROJECT_DIR$/src-server/EventBus.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/HTTPRouter.ts" afterPath="$PROJECT_DIR$/src-server/HTTPRouter.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/Server.ts" afterPath="$PROJECT_DIR$/src-server/Server.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/StaticFile.ts" afterPath="$PROJECT_DIR$/src-server/StaticFile.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/StaticFilesServer.ts" afterPath="$PROJECT_DIR$/src-server/StaticFilesServer.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/Variable.ts" afterPath="$PROJECT_DIR$/src-server/Variable.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/VariablesCollection.ts" afterPath="$PROJECT_DIR$/src-server/VariablesCollection.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/URI.d.ts" afterPath="$PROJECT_DIR$/src-server/typings/urijs/URI.d.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/express.d.ts" afterPath="$PROJECT_DIR$/src-server/typings/express/express.d.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/hash-table.d.ts" afterPath="$PROJECT_DIR$/src-client/typings/hash-table/hash-table.d.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/jquery.d.ts" afterPath="$PROJECT_DIR$/src-client/typings/jquery/jquery.d.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/node.d.ts" afterPath="$PROJECT_DIR$/src-server/typings/node/node.d.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/socket.io-client.d.ts" afterPath="$PROJECT_DIR$/src-client/typings/socket.io-client/socket.io-client.d.ts" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/try.d.ts" afterPath="$PROJECT_DIR$/src-server/typings/try/try.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/Config.js" afterPath="$PROJECT_DIR$/build/server/Config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/DataStore.js" afterPath="$PROJECT_DIR$/build/server/DataStore.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/DataStoreSQLiteAdapter.js" afterPath="$PROJECT_DIR$/build/server/DataStoreSQLiteAdapter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/EventBus.js" afterPath="$PROJECT_DIR$/build/server/EventBus.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/FDBOConnection.js" afterPath="$PROJECT_DIR$/build/client/FDBOConnection.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/FDBOEvent.js" afterPath="$PROJECT_DIR$/build/client/FDBOEvent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/FDBOEventEmitter.js" afterPath="$PROJECT_DIR$/build/client/FDBOEventEmitter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/FDBOHash.js" afterPath="$PROJECT_DIR$/build/client/FDBOHash.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/FDBOUtils.js" afterPath="$PROJECT_DIR$/build/client/FDBOUtils.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/FinalDBObject.js" afterPath="$PROJECT_DIR$/build/client/FinalDBObject.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/HTTPRouter.js" afterPath="$PROJECT_DIR$/build/server/HTTPRouter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/IFDBOListener.js" afterPath="$PROJECT_DIR$/build/client/IFDBOListener.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/IFDBOListenerDescription.js" afterPath="$PROJECT_DIR$/build/client/IFDBOListenerDescription.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/Server.js" afterPath="$PROJECT_DIR$/build/server/Server.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/StaticFile.js" afterPath="$PROJECT_DIR$/build/server/StaticFile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/StaticFilesServer.js" afterPath="$PROJECT_DIR$/build/server/StaticFilesServer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/Variable.js" afterPath="$PROJECT_DIR$/build/server/Variable.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/VariablesCollection.js" afterPath="$PROJECT_DIR$/build/server/VariablesCollection.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/http-server.js" afterPath="$PROJECT_DIR$/examples/http-server.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/index.js" afterPath="$PROJECT_DIR$/build/server/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+    </list>
+    <ignored path="final-db-object.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="final-db-object" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/body-parser/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3550">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/body-parser/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5353">
+              <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="with-existing-express-app.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/examples/with-existing-express-app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.22097759" vertical-offset="465" max-vertical-offset="2036">
+              <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Server.ts" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src-server/Server.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3594" max-vertical-offset="5260">
+              <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="true" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/node_modules/socket.io-router/src/index.ts" />
+        <option value="$PROJECT_DIR$/src/types/types-server.d.ts" />
+        <option value="$PROJECT_DIR$/node_modules/socket.io-router/src/types/types.d.ts" />
+        <option value="$PROJECT_DIR$/node_modules/socket.io-router/src/typings/tsd.d.ts" />
+        <option value="$PROJECT_DIR$/node_modules/socket.io-router/Gruntfile.js" />
+        <option value="$PROJECT_DIR$/node_modules/socket.io-router/package.json" />
+        <option value="$PROJECT_DIR$/Gruntfile.js" />
+        <option value="$PROJECT_DIR$/src-client/typings/tsd.d.ts" />
+        <option value="$PROJECT_DIR$/src-client/FDBOConnection.ts" />
+        <option value="$PROJECT_DIR$/src-client/FDBOEvent.ts" />
+        <option value="$PROJECT_DIR$/src-client/FDBOEventEmitter.ts" />
+        <option value="$PROJECT_DIR$/src-client/FDBOHash.ts" />
+        <option value="$PROJECT_DIR$/src-client/FDBOUtils.ts" />
+        <option value="$PROJECT_DIR$/src-client/FinalDBObject.ts" />
+        <option value="$PROJECT_DIR$/src-server/EventBus.ts" />
+        <option value="$PROJECT_DIR$/src-server/index.ts" />
+        <option value="$PROJECT_DIR$/src-server/StaticFile.ts" />
+        <option value="$PROJECT_DIR$/src-server/typings/socket.io-router/socket.io-router.d.ts" />
+        <option value="$PROJECT_DIR$/src-server/interfaces/IRawData.ts" />
+        <option value="$PROJECT_DIR$/src-server/interfaces/IVariable.ts" />
+        <option value="$PROJECT_DIR$/src-server/interfaces/IVariablesCollection.ts" />
+        <option value="$PROJECT_DIR$/src-server/interfaces/IDataStoreAdapter.ts" />
+        <option value="$PROJECT_DIR$/src-server/interfaces/IDataStoreSQLiteConfig.ts" />
+        <option value="$PROJECT_DIR$/src-server/interfaces/IEnvironmentConfig.ts" />
+        <option value="$PROJECT_DIR$/src-server/interfaces/IConfig.ts" />
+        <option value="$PROJECT_DIR$/src-server/interfaces/IDataStoreConfig.ts" />
+        <option value="$PROJECT_DIR$/src-server/Config.ts" />
+        <option value="$PROJECT_DIR$/src-server/Variable.ts" />
+        <option value="$PROJECT_DIR$/src-server/VariablesCollection.ts" />
+        <option value="$PROJECT_DIR$/src-server/DataStoreSQLiteAdapter.ts" />
+        <option value="$PROJECT_DIR$/src-server/DataStore.ts" />
+        <option value="$PROJECT_DIR$/src-server/HTTPRouter.ts" />
+        <option value="$PROJECT_DIR$/src-server/SocketRoutesManager.ts" />
+        <option value="$PROJECT_DIR$/src-server/typings/urijs/URI.d.ts" />
+        <option value="$PROJECT_DIR$/node_modules/socket.io-router/src/SocketRouter.ts" />
+        <option value="$PROJECT_DIR$/node_modules/socket.io-router/src/typings/socket.io-server/socket.io-server.d.ts" />
+        <option value="$PROJECT_DIR$/node_modules/socket.io-router/src/typings/socket.io-router/socket.io-router.d.ts" />
+        <option value="$PROJECT_DIR$/node_modules/socket.io-router/src/SocketRequest.ts" />
+        <option value="$PROJECT_DIR$/src/types/node.d.ts" />
+        <option value="$PROJECT_DIR$/src-server/typings/node/node.d.ts" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src-server/typings/body-parser/body-parser.d.ts" />
+        <option value="$PROJECT_DIR$/src-server/typings/tsd.d.ts" />
+        <option value="$PROJECT_DIR$/examples/http-server.js" />
+        <option value="$PROJECT_DIR$/node_modules/body-parser/package.json" />
+        <option value="$PROJECT_DIR$/src-server/Server.ts" />
+        <option value="$PROJECT_DIR$/examples/with-existing-express-app.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsGruntFileManager">
+    <gruntfiles>
+      <GruntfileState>
+        <gruntfile-path>$PROJECT_DIR$/Gruntfile.js</gruntfile-path>
+      </GruntfileState>
+    </gruntfiles>
+    <initial>false</initial>
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="fdbo" pattern="" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-2" />
+    <option name="width" value="1924" />
+    <option name="height" value="1057" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>File Watchers</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>TaskProblemsInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="final-db-object" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="final-db-object" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="final-db-object" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="options.lastSelected" value="settings" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="FullScreen" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/node_modules/socket.io-router/src/typings" />
+      <recent name="$PROJECT_DIR$/src-server/typings" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src-server/typings/socket.io-server" />
+      <recent name="$PROJECT_DIR$/src-server/typings/try" />
+      <recent name="$PROJECT_DIR$/src-client/typings/socket.io-client" />
+      <recent name="$PROJECT_DIR$/src-client/typings/hash-table" />
+      <recent name="$PROJECT_DIR$/src-server" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="name" value="Dart" />
+      <option name="saveOutputToFile" value="false" />
+      <option name="showConsoleOnStdErr" value="false" />
+      <option name="showConsoleOnStdOut" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
+      <setting name="configLocationType" value="CONFIG_FILE" />
+      <setting name="settingsFile" value="" />
+      <setting name="serverType" value="INTERNAL" />
+      <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b1cbb5b2-abe9-4b18-824b-96b2f7d32caa" name="Default" comment="" />
+      <created>1410038326144</created>
+      <updated>1410038326144</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-2" y="0" width="1924" height="1057" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20490094" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19425173" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src-client/FDBOConnection.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4268">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-client/FDBOEvent.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1509">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-client/FDBOEventEmitter.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2656">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-client/FDBOUtils.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1323">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-client/FinalDBObject.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3431">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-client/IFDBOEvent.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1013">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-client/IFDBOListener.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1075">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-client/IFDBOListenerDescription.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1084">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-client/typings/tsd.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03156823" vertical-offset="0" max-vertical-offset="1075">
+          <caret line="1" column="51" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-client/FDBOHash.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03156823" vertical-offset="0" max-vertical-offset="3524">
+          <caret line="1" column="39" selection-start-line="1" selection-start-column="39" selection-end-line="1" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/EventBus.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1323">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/StaticFile.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1664">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/StaticFilesServer.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3741">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/tsd.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1695">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1044">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/typings/socket.io-router/socket.io-router.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06313646" vertical-offset="0" max-vertical-offset="1540">
+          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/Environment.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1850">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/interfaces/IRawData.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1168">
+          <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/interfaces/IVariable.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1323">
+          <caret line="0" column="40" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/interfaces/IVariablesCollection.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1261">
+          <caret line="0" column="42" selection-start-line="0" selection-start-column="42" selection-end-line="0" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/interfaces/IDataStoreAdapter.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12627292" vertical-offset="0" max-vertical-offset="1323">
+          <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/interfaces/IDataStoreSQLiteConfig.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1075">
+          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/interfaces/IConfig.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1199">
+          <caret line="0" column="60" selection-start-line="0" selection-start-column="60" selection-end-line="0" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/interfaces/IDataStoreConfig.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1137">
+          <caret line="0" column="68" selection-start-line="0" selection-start-column="68" selection-end-line="0" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/interfaces/IEnvironmentConfig.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1323">
+          <caret line="0" column="56" selection-start-line="0" selection-start-column="56" selection-end-line="0" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/Config.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4330">
+          <caret line="5" column="67" selection-start-line="5" selection-start-column="67" selection-end-line="5" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/Variable.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3958">
+          <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+          <caret line="3" column="48" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/VariablesCollection.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2842">
+          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+          <caret line="4" column="48" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/DataStoreSQLiteAdapter.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3183">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/DataStore.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4919">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/typings/express/express.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37881875" vertical-offset="744" max-vertical-offset="34369">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/HTTPRouter.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="107" max-vertical-offset="3152">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/typings/urijs/URI.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.59979635" vertical-offset="0" max-vertical-offset="6841">
+          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/socket.io-router/src/SocketRoute.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06313646" vertical-offset="0" max-vertical-offset="1199">
+          <caret line="2" column="63" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/socket.io-router/src/typings/socket.io-server/socket.io-server.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3329939" vertical-offset="603" max-vertical-offset="2749">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/socket.io-router/src/SocketRouter.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28411406" vertical-offset="0" max-vertical-offset="2129">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/socket.io-router/src/SocketRequest.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15784115" vertical-offset="31" max-vertical-offset="1323">
+          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/SocketRoutesManager.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3329939" vertical-offset="944" max-vertical-offset="3617">
+          <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/socket.io-router/src/typings/socket.io-router/socket.io-router.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41038698" vertical-offset="0" max-vertical-offset="1757">
+          <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/typings/node/node.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4460285" vertical-offset="10784" max-vertical-offset="44878">
+          <caret line="357" column="4" selection-start-line="357" selection-start-column="4" selection-end-line="357" selection-end-column="4" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/typings/body-parser/body-parser.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15784115" vertical-offset="0" max-vertical-offset="2253">
+          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/typings/tsd.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1292">
+          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41038698" vertical-offset="310" max-vertical-offset="2067">
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/server/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1013">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/http-server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1788">
+          <caret line="0" column="36" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/body-parser/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3555">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/body-parser/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5353">
+          <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/Server.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3594" max-vertical-offset="5260">
+          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/with-existing-express-app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22097759" vertical-offset="465" max-vertical-offset="2036">
+          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <last-edited>fdbo</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+          <order>
+            <scope name="fdbo" />
+          </order>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
+

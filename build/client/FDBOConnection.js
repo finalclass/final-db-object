@@ -1,7 +1,3 @@
-///<reference path="../types/types-client.d.ts"/>
-///<reference path="FinalDBObject.ts"/>
-///<reference path="FDBOHash.ts"/>
-///<reference path="FDBOEvent.ts"/>
 var FDBOConnection = (function () {
     function FDBOConnection(serverURL) {
         this.serverURL = serverURL;
@@ -58,9 +54,6 @@ var FDBOConnection = (function () {
         }
     };
 
-    // ---------------------------
-    // Socket responders
-    // ---------------------------
     FDBOConnection.prototype.onValue = function (data) {
         var obj = this.hash.get(data.path);
         if (obj) {

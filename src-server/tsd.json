@@ -1,0 +1,24 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "urijs/URI.d.ts": {
+      "commit": "0031a67d843278b40514452c5e68b8fc0788cee7"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "0031a67d843278b40514452c5e68b8fc0788cee7"
+    },
+    "node/node.d.ts": {
+      "commit": "0031a67d843278b40514452c5e68b8fc0788cee7"
+    },
+    "sqlite3/sqlite3.d.ts": {
+      "commit": "0031a67d843278b40514452c5e68b8fc0788cee7"
+    },
+    "express/express.d.ts": {
+      "commit": "0031a67d843278b40514452c5e68b8fc0788cee7"
+    }
+  }
+}

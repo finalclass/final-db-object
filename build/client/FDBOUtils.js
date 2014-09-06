@@ -1,4 +1,3 @@
-///<reference path="../types/types-client.d.ts"/>
 var FDBOUtils = (function () {
     function FDBOUtils() {
     }

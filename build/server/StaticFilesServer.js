@@ -59,7 +59,6 @@ var StaticFilesServer = (function () {
 
         var t = Try();
 
-        //read the files in order
         this.clientScripts.forEach(function (file) {
             return t(function () {
                 var stream = fs.createReadStream(file.fullPath);

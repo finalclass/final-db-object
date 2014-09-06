@@ -1,4 +1,3 @@
-///<reference path="../types/types-server.d.ts"/>
 var path = require('path');
 
 var StaticFile = (function () {

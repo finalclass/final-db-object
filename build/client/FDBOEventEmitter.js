@@ -1,8 +1,3 @@
-///<reference path="../types/types-client.d.ts"/>
-///<reference path="FDBOEvent.ts"/>
-///<reference path="IFDBOListener.ts"/>
-///<reference path="IFDBOEvent.ts"/>
-///<reference path="IFDBOListenerDescription.ts"/>
 var FDBOEventEmitter = (function () {
     function FDBOEventEmitter() {
         this._listeners = Object.create(null);
