@@ -2,109 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1cbb5b2-abe9-4b18-824b-96b2f7d32caa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/hash-table" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/socket.io-router" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/socket.io-server" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Gruntfile.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IConfig.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IConfig.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IDataStoreAdapter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IDataStoreAdapter.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IDataStoreConfig.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IDataStoreConfig.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IDataStoreSQLiteConfig.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IDataStoreSQLiteConfig.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IEnvironmentConfig.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IEnvironmentConfig.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IRawData.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IRawData.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IVariable.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IVariable.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/interfaces/IVariablesCollection.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/interfaces/IVariablesCollection.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/server/SocketRoutesManager.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/SocketRoutesManager.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-client/typings/urijs/URI.d.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/body-parser/body-parser.d.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/final-db-object.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/final_db_object_node_modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/index.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/jquery/jquery.d.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/sel.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/sqlite3/sqlite3.d.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-client/typings/tsd.d.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/typings/tsd.d.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-client/tsd.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src-server/tsd.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/with-existing-express-app.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/server/index.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/types/socket.io-server.d.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/types/sqlite3.d.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/types/types-client.d.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/types/types-server.d.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/tsreq/index.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/FDBOConnection.ts" afterPath="$PROJECT_DIR$/src-client/FDBOConnection.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/FDBOEvent.ts" afterPath="$PROJECT_DIR$/src-client/FDBOEvent.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/FDBOEventEmitter.ts" afterPath="$PROJECT_DIR$/src-client/FDBOEventEmitter.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/FDBOHash.ts" afterPath="$PROJECT_DIR$/src-client/FDBOHash.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/FDBOUtils.ts" afterPath="$PROJECT_DIR$/src-client/FDBOUtils.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/FinalDBObject.ts" afterPath="$PROJECT_DIR$/src-client/FinalDBObject.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/IFDBOEvent.ts" afterPath="$PROJECT_DIR$/src-client/IFDBOEvent.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/IFDBOListener.ts" afterPath="$PROJECT_DIR$/src-client/IFDBOListener.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/IFDBOListenerDescription.ts" afterPath="$PROJECT_DIR$/src-client/IFDBOListenerDescription.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/Config.ts" afterPath="$PROJECT_DIR$/src-server/Config.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/DataStore.ts" afterPath="$PROJECT_DIR$/src-server/DataStore.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/DataStoreSQLiteAdapter.ts" afterPath="$PROJECT_DIR$/src-server/DataStoreSQLiteAdapter.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/Environment.ts" afterPath="$PROJECT_DIR$/src-server/Environment.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/EventBus.ts" afterPath="$PROJECT_DIR$/src-server/EventBus.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/HTTPRouter.ts" afterPath="$PROJECT_DIR$/src-server/HTTPRouter.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/Server.ts" afterPath="$PROJECT_DIR$/src-server/Server.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/StaticFile.ts" afterPath="$PROJECT_DIR$/src-server/StaticFile.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/StaticFilesServer.ts" afterPath="$PROJECT_DIR$/src-server/StaticFilesServer.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/Variable.ts" afterPath="$PROJECT_DIR$/src-server/Variable.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/VariablesCollection.ts" afterPath="$PROJECT_DIR$/src-server/VariablesCollection.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/URI.d.ts" afterPath="$PROJECT_DIR$/src-server/typings/urijs/URI.d.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/express.d.ts" afterPath="$PROJECT_DIR$/src-server/typings/express/express.d.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/hash-table.d.ts" afterPath="$PROJECT_DIR$/src-client/typings/hash-table/hash-table.d.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/jquery.d.ts" afterPath="$PROJECT_DIR$/src-client/typings/jquery/jquery.d.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/node.d.ts" afterPath="$PROJECT_DIR$/src-server/typings/node/node.d.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/socket.io-client.d.ts" afterPath="$PROJECT_DIR$/src-client/typings/socket.io-client/socket.io-client.d.ts" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/types/try.d.ts" afterPath="$PROJECT_DIR$/src-server/typings/try/try.d.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/Config.js" afterPath="$PROJECT_DIR$/build/server/Config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/DataStore.js" afterPath="$PROJECT_DIR$/build/server/DataStore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/DataStoreSQLiteAdapter.js" afterPath="$PROJECT_DIR$/build/server/DataStoreSQLiteAdapter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/EventBus.js" afterPath="$PROJECT_DIR$/build/server/EventBus.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/FDBOConnection.js" afterPath="$PROJECT_DIR$/build/client/FDBOConnection.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/FDBOEvent.js" afterPath="$PROJECT_DIR$/build/client/FDBOEvent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/FDBOEventEmitter.js" afterPath="$PROJECT_DIR$/build/client/FDBOEventEmitter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/FDBOHash.js" afterPath="$PROJECT_DIR$/build/client/FDBOHash.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/FDBOUtils.js" afterPath="$PROJECT_DIR$/build/client/FDBOUtils.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/FinalDBObject.js" afterPath="$PROJECT_DIR$/build/client/FinalDBObject.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/HTTPRouter.js" afterPath="$PROJECT_DIR$/build/server/HTTPRouter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/IFDBOListener.js" afterPath="$PROJECT_DIR$/build/client/IFDBOListener.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/client/IFDBOListenerDescription.js" afterPath="$PROJECT_DIR$/build/client/IFDBOListenerDescription.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/Server.js" afterPath="$PROJECT_DIR$/build/server/Server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/StaticFile.js" afterPath="$PROJECT_DIR$/build/server/StaticFile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/StaticFilesServer.js" afterPath="$PROJECT_DIR$/build/server/StaticFilesServer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/Variable.js" afterPath="$PROJECT_DIR$/build/server/Variable.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/VariablesCollection.js" afterPath="$PROJECT_DIR$/build/server/VariablesCollection.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/http-server.js" afterPath="$PROJECT_DIR$/examples/http-server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/server/index.js" afterPath="$PROJECT_DIR$/build/server/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/client/FDBOConnection.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/client/FDBOEvent.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/client/FDBOEventEmitter.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/client/FDBOHash.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/client/FDBOUtils.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/client/FinalDBObject.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/client/IFDBOEvent.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/client/IFDBOListener.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/client/IFDBOListenerDescription.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/Config.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/DataStore.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/DataStoreSQLiteAdapter.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/Environment.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/EventBus.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/HTTPRouter.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/Server.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/SocketRoutesManager.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/StaticFile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/StaticFilesServer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/Variable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/VariablesCollection.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/interfaces/IConfig.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/interfaces/IDataStoreAdapter.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/interfaces/IDataStoreConfig.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/interfaces/IDataStoreSQLiteConfig.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/interfaces/IEnvironmentConfig.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/interfaces/IRawData.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/interfaces/IVariable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/server/interfaces/IVariablesCollection.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/with-existing-express-app.js" afterPath="$PROJECT_DIR$/examples/with-existing-express-app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="final-db-object.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -148,11 +77,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="with-existing-express-app.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="with-existing-express-app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/with-existing-express-app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22097759" vertical-offset="465" max-vertical-offset="2036">
+            <state vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="2036">
               <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SocketRoutesManager.ts" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src-server/SocketRoutesManager.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.18940938" vertical-offset="0" max-vertical-offset="3617">
+              <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -312,6 +251,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="final-db-object" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="final-db-object" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src-server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -396,14 +349,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="0" width="1924" height="1057" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20490094" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20490094" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -734,14 +687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src-server/SocketRoutesManager.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3329939" vertical-offset="944" max-vertical-offset="3617">
-          <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/socket.io-router/src/typings/socket.io-router/socket.io-router.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41038698" vertical-offset="0" max-vertical-offset="1757">
@@ -784,14 +729,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build/server/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1013">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/http-server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1788">
@@ -828,8 +765,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/with-existing-express-app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22097759" vertical-offset="465" max-vertical-offset="2036">
+        <state vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="2036">
           <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-server/SocketRoutesManager.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18940938" vertical-offset="0" max-vertical-offset="3617">
+          <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
           <folding />
         </state>
       </provider>
